@@ -136,7 +136,7 @@ function startGame() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  canvas.style.backgroundColor = 'darkblue';
+  
 
   window.addEventListener('keydown', onKeyDown);
   over.pause();
