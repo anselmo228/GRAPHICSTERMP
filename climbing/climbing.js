@@ -473,6 +473,7 @@ class Game {
 
     // 이전 블록이 "MISSED" 상태라면 게임 종료 처리
     if (lastBlock && lastBlock.state == lastBlock.STATES.MISSED) {
+      //요기다가 무당이 추가할거임!!!!!!!!!!
       return this.endGame();
     }
 
