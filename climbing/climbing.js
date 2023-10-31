@@ -32,6 +32,24 @@ class Stage {
     // scene
     this.scene = new THREE.Scene();
 
+    // // 이미지 텍스처 생성
+    // const texture = new THREE.TextureLoader().load('gachon.jpg');
+
+    // // 평면 생성
+    // const planeGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
+    // const planeMaterial = new THREE.MeshBasicMaterial({ map: texture });
+    // const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+
+    // // 평면을 카메라 시야에 배치 ->>>>>>>>>>>>>>>>>이거 사이즈조절이 안됨 ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ대체왜
+    // // 사이즈 조절 해야지 블록 속도가 원래대로 돌아올거 같아서...............
+    // // 일단은 주석 처리해둠
+    // plane.position.x = -20;
+    // plane.position.y = -20;
+    // plane.position.z = -20;
+
+    // // 장면에 추가
+    // this.scene.add(plane);
+
     // camera
     let aspect = window.innerWidth / window.innerHeight;
     let d = 20;
