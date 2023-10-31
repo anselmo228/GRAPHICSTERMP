@@ -32,23 +32,41 @@ class Stage {
     // scene
     this.scene = new THREE.Scene();
 
+    //!----------------------문제있는코드----------------------!
     // // 이미지 텍스처 생성
     // const texture = new THREE.TextureLoader().load('gachon.jpg');
 
+    // // 이미지의 원래 크기 가져오기
+    // const imageWidth = texture.image.width;
+    // const imageHeight = texture.image.height;
+
+    // // 화면의 가로 및 세로 크기 가져오기
+    // const screenWidth = window.innerWidth;
+    // const screenHeight = window.innerHeight;
+
+    // // 이미지의 비율을 유지하도록 가로 및 세로 크기 조정
+    // const aspectRatio = imageWidth / imageHeight;
+    // let newWidth, newHeight;
+
+    // if (screenWidth / screenHeight > aspectRatio) {
+    //   newWidth = screenWidth;
+    //   newHeight = screenWidth / aspectRatio;
+    // } else {
+    //   newHeight = screenHeight;
+    //   newWidth = screenHeight * aspectRatio;
+    // }
+
     // // 평면 생성
-    // const planeGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
+    // const planeGeometry = new THREE.PlaneGeometry(newWidth, newHeight);
     // const planeMaterial = new THREE.MeshBasicMaterial({ map: texture });
     // const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
-    // // 평면을 카메라 시야에 배치 ->>>>>>>>>>>>>>>>>이거 사이즈조절이 안됨 ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ대체왜
-    // // 사이즈 조절 해야지 블록 속도가 원래대로 돌아올거 같아서...............
-    // // 일단은 주석 처리해둠
-    // plane.position.x = -20;
-    // plane.position.y = -20;
-    // plane.position.z = -20;
+    // // 평면을 카메라 시야에 배치
+    // plane.position.z = -100;
 
     // // 장면에 추가
-    // this.scene.add(plane);
+    // scene.add(plane);
+
 
     // camera
     let aspect = window.innerWidth / window.innerHeight;
