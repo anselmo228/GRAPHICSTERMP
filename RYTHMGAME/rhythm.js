@@ -84,9 +84,9 @@ function gameOver() {
   ctx.font = '36px Arial';
   ctx.fillStyle = 'red';
   ctx.fillText('Game Over', canvas.width / 2 - 90, canvas.height / 2 - 50);
-  ctx.font = '17px Arial';
-  ctx.fillStyle = 'white';
-  ctx.fillText('Your Sore: ' + score, canvas.width / 2 - 50, canvas.height / 2 - 20);
+  ctx.font = '25px Arial';
+  ctx.fillStyle = 'black';
+  ctx.fillText('Your Sore: ' + score, canvas.width / 2 - 75, canvas.height / 2 - 20);
 
   tryAgainButton.style.display = 'block';
   /*Stop Song and Replay*/
@@ -114,7 +114,7 @@ function gameLoop() {
   ctx.beginPath();
   ctx.moveTo(0, canvas.height - arrowSize);
   ctx.lineTo(canvas.width, canvas.height - arrowSize);
-  ctx.strokeStyle = 'gray';
+  ctx.strokeStyle = 'blue';
   ctx.lineWidth = 5;
   ctx.stroke();
 
