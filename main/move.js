@@ -15,12 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const loader = new THREE.GLTFLoader();
   let character;
 
-  loader.load("model/mudang.glb", (gltf) => {
+  loader.load("../model/mudang.glb", (gltf) => {
     character = gltf.scene;
     scene.add(character);
-
-    // 이곳에 캐릭터의 초기 위치, 회전 및 크기를 설정할 수 있습니다.
     character.position.set(0, 0, 0);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(1, 1, 1);
+    character.add(directionalLight);
 
     camera.position.z = 5;
 
@@ -30,8 +32,24 @@ document.addEventListener("DOMContentLoaded", function () {
   function animate() {
     requestAnimationFrame(animate);
 
-    // 이곳에 움직임 논리를 추가하세요.
+    const movementSpeed = 0.01;
 
+    document.addEventListener("keydown", (event) => {
+      switch (event.key) {
+        case "w":
+          character.position.z -= movementSpeed;
+          break;
+        case "s":
+          character.position.z += movementSpeed;
+          break;
+        case "a":
+          character.position.x -= movementSpeed;
+          break;
+        case "d":
+          character.position.x += movementSpeed;
+          break;
+      }
+    });
     renderer.render(scene, camera);
   }
 });
