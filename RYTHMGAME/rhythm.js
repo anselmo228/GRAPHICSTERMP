@@ -1,6 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const tryAgainButton = document.getElementById('tryAgain');
+const progressBar = document.getElementById('progressFill');
 
 const arrowImages = {
   ArrowUp: new Image(),
@@ -9,14 +10,18 @@ const arrowImages = {
   ArrowRight: new Image(),
 };
 
-const song = new Audio('missionimpossible.mp3');
+const track1 = 'missionimpossible.mp3';
+const track2 = 'Pirates of the Caribbean.mp3';
+let currentTrack = track1;
+let song = new Audio(currentTrack);
 const over = new Audio('gameover.mp3');
+const clear = new Audio('clear.mp3')
 const arrowKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
 const arrowSize = 50;
-const arrowSpeed = 3;
+let arrowSpeed = 3;
 const arrows = [];
-const maxLives = 5;
-let score = 0;
+const maxLives = 7;
+let score = 90;
 let lives = maxLives;
 let isGameOver = false;
 
@@ -40,6 +45,36 @@ function drawArrow(arrow) {
   ctx.drawImage(arrow.image, arrow.x, arrow.y, arrowSize, arrowSize);
 }
 
+function updateProgressBar() {
+  const progress = (lives / maxLives) * 100;
+  progressBar.style.width = progress + '%';
+}
+
+function switchTrack() {
+  if (currentTrack === track1 && score >= 50) {
+    currentTrack = track2;
+    arrowSpeed = 5;
+    song.pause();
+    song = new Audio(currentTrack);
+    song.play();
+  }
+}
+
+function increaseSpeed() {
+  if (score >= 60) {
+    arrowSpeed = 6;
+  }
+  if (score >= 70) {
+    arrowSpeed = 7;
+  }
+  if (score >= 80) {
+    arrowSpeed = 8;
+  }
+  if (score >= 90) {
+    arrowSpeed = 9;
+  }
+}
+
 function onKeyDown(event) {
   if (isGameOver) {
     return;
@@ -50,10 +85,7 @@ function onKeyDown(event) {
 
   for (let i = 0; i < arrows.length; i++) {
     if (key === arrows[i].key) {
-      if (
-        arrows[i].y >= canvas.height - arrowSize &&
-        arrows[i].y <= canvas.height - 2
-      ) {
+      if (arrows[i].y >= canvas.height - arrowSize && arrows[i].y <= canvas.height - 2) {
         score += 1;
         arrows.splice(i, 1);
         isHit = true;
@@ -62,12 +94,12 @@ function onKeyDown(event) {
     }
   }
 
-  /*목숨 줄어드는 경우 수정 필요 버그 ㅈㄴ 많음*/
   if (!isHit) {
     for (let i = 0; i < arrows.length; i++) {
       if (arrows[i].y >= canvas.height - arrowSize) {
         lives -= 1;
         arrows.splice(i, 1);
+        updateProgressBar();
         break;
       }
     }
@@ -75,6 +107,24 @@ function onKeyDown(event) {
       gameOver();
     }
   }
+
+  if (score === 100) {
+    gameClear(); 
+  }
+
+  switchTrack();
+}
+
+function gameClear() {
+  isGameOver = true;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.font = '50px Arial';
+  ctx.fillStyle = 'green';
+  ctx.fillText('Game Clear!', canvas.width / 2 - 135, canvas.height / 3 - 150);
+  song.pause();
+  song.currentTime = 0;
+  clear.play();
 }
 
 function gameOver() {
@@ -86,10 +136,9 @@ function gameOver() {
   ctx.fillText('Game Over', canvas.width / 2 - 90, canvas.height / 2 - 50);
   ctx.font = '25px Arial';
   ctx.fillStyle = 'black';
-  ctx.fillText('Your Sore: ' + score, canvas.width / 2 - 75, canvas.height / 2 - 20);
+  ctx.fillText('Your Score: ' + score, canvas.width / 2 - 75, canvas.height / 2 - 20);
 
   tryAgainButton.style.display = 'block';
-  /*Stop Song and Replay*/
   song.pause();
   song.currentTime = 0;
   over.play();
@@ -100,7 +149,11 @@ tryAgainButton.addEventListener('click', () => {
   score = 0;
   lives = maxLives;
   arrows.length = 0;
+  updateProgressBar();
   tryAgainButton.style.display = 'none';
+  currentTrack = track1;
+  arrowSpeed = 3;
+  song = new Audio(currentTrack);
   startGame();
 });
 
@@ -109,13 +162,16 @@ function gameLoop() {
     return;
   }
 
+  increaseSpeed();
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   ctx.beginPath();
-  ctx.moveTo(0, canvas.height - arrowSize);
-  ctx.lineTo(canvas.width, canvas.height - arrowSize);
-  ctx.strokeStyle = 'blue';
-  ctx.lineWidth = 5;
+  ctx.moveTo(0, canvas.height);
+  ctx.lineTo(canvas.width, canvas.height);
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = arrowSize;
+  ctx.lineCap = 'round';
   ctx.stroke();
 
   for (let i = 0; i < arrows.length; i++) {
@@ -125,9 +181,12 @@ function gameLoop() {
   }
 
   ctx.font = '24px Arial';
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = 'deep blue';
   ctx.fillText('Score: ' + score, 20, 40);
-  ctx.fillText('Lives: ' + lives, 20, 80);
+  updateProgressBar();
+  ctx.fillStyle = 'white';
+  ctx.fillText('Song: ' + currentTrack, 20, 80);
+  ctx.fillText('Speed: ' + arrowSpeed, 20, 120);
 
   requestAnimationFrame(gameLoop);
 }
@@ -135,8 +194,6 @@ function gameLoop() {
 function startGame() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
-  
 
   window.addEventListener('keydown', onKeyDown);
   over.pause();

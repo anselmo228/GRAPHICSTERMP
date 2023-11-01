@@ -25,12 +25,25 @@
         left: 50%;
         transform: translate(-50%, -50%);
       }
+
+      #progressBar {
+        width: 100%;
+        background-color: #ccc;
+      }
+
+      #progressFill {
+        height: 20px;
+        background-color: #4caf50; 
+      }
     </style>
   </head>
   <body>
     <canvas id="gameCanvas"></canvas>
     <p id="gameOver" style="display: none;">Game Over</p>
     <button id="tryAgain" style="display: none;">Try Again</button>
+    <div id="progressBar">
+      <div id="progressFill"></div>
+    </div>
     <script src="rhythm.js"></script>
   </body>
 </html>
