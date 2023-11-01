@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const loader = new THREE.GLTFLoader();
   let character;
 
-  loader.load("../model/mudang.glb", (gltf) => {
+  loader.load("../model/mudang2.glb", (gltf) => {
     character = gltf.scene;
     scene.add(character);
     character.position.set(0, 0, 0);
@@ -23,6 +23,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(1, 1, 1);
     character.add(directionalLight);
+
+    const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight2.position.set(0, 0, 0);
+    character.add(directionalLight2);
 
     camera.position.z = 5;
 
