@@ -10,25 +10,25 @@ const arrowImages = {
   ArrowRight: new Image(),
 };
 
-const track1 = 'missionimpossible.mp3';
-const track2 = 'Pirates of the Caribbean.mp3';
+const track1 = './songs/missionimpossible.mp3';
+const track2 = './songs/Pirates of the Caribbean.mp3';
 let currentTrack = track1;
 let song = new Audio(currentTrack);
-const over = new Audio('gameover.mp3');
-const clear = new Audio('clear.mp3')
+const over = new Audio('./songs/gameover.mp3');
+const clear = new Audio('./songs/clear.mp3')
 const arrowKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
 const arrowSize = 50;
 let arrowSpeed = 3;
 const arrows = [];
 const maxLives = 7;
-let score = 90;
+let score = 0;
 let lives = maxLives;
 let isGameOver = false;
 
-arrowImages.ArrowUp.src = 'arrow_up.png';
-arrowImages.ArrowDown.src = 'arrow_down.png';
-arrowImages.ArrowLeft.src = 'arrow_left.png';
-arrowImages.ArrowRight.src = 'arrow_right.png';
+arrowImages.ArrowUp.src = './asets/arrow_up.png';
+arrowImages.ArrowDown.src = './asets/arrow_down.png';
+arrowImages.ArrowLeft.src = './asets/arrow_left.png';
+arrowImages.ArrowRight.src = './asets/arrow_right.png';
 
 function createArrow() {
   const direction = arrowKeys[Math.floor(Math.random() * 4)];
