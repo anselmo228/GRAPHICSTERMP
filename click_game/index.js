@@ -12,9 +12,10 @@ var score = 0;
 var totalTargets = 3;
 var speed = 0.01;
 var complete = false;
-var comments = ["Easy", "Medium", "Hard"]; // level 코멘트 배열에서 항목을 줄입니다.
+var comments = ["EASY", "MEDIUM", "HARD"]; // level 코멘트 배열에서 항목을 줄입니다.
 var myLevel = document.getElementById("level");
 var myScore = document.getElementById("score");
+var progressBar = document.getElementById("progress-bar");
 
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
@@ -225,6 +226,7 @@ function onDocumentMouseDown(event) {
               "<strong>You win!</strong> Click the screen to play again.";
           }
         }
+        updateProgressBar(); // 여기서 호출
       }
     });
   }
@@ -246,6 +248,12 @@ function restartScene() {
   myLevel.innerText = comments[level - 1];
   scene.remove(holder);
   addHolder();
+  updateProgressBar(); // 여기서 호출
+}
+
+function updateProgressBar() {
+  var progress = (score / totalTargets) * 100;
+  progressBar.style.width = progress + "%";
 }
 
 document
