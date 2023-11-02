@@ -57,6 +57,8 @@ function switchTrack() {
     song.pause();
     song = new Audio(currentTrack);
     song.play();
+
+    document.body.style.backgroundImage = 'url("./asets/vision.jpg")';
   }
 }
 
@@ -154,6 +156,7 @@ tryAgainButton.addEventListener('click', () => {
   currentTrack = track1;
   arrowSpeed = 3;
   song = new Audio(currentTrack);
+  document.body.style.backgroundImage = 'url("./asets/gachon.jpg")';
   startGame();
 });
 
