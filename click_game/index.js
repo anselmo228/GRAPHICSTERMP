@@ -10,12 +10,17 @@ var level = 1;
 var totalLevels = 3; // level 수를 3으로 수정합니다.
 var score = 0;
 var totalTargets = 3;
-var speed = 0.01;
+var speed = 0.005;
 var complete = false;
 var comments = ["EASY", "MEDIUM", "HARD"]; // level 코멘트 배열에서 항목을 줄입니다.
 var myLevel = document.getElementById("level");
 var myScore = document.getElementById("score");
 var progressBar = document.getElementById("progress-bar");
+var stars = []; // 별들의 초기 위치를 저장하는 배열
+
+var modal = document.getElementById("modal");
+var startBtn = document.getElementById("startGame");
+var closeBtn = document.getElementsByClassName("close")[0];
 
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
@@ -56,8 +61,21 @@ function addStars() {
     star.position.y = Math.random() * 20 - 10;
     star.position.z = Math.random() * 20 - 10;
 
+    stars.push(star); // 각 별을 stars 배열에 추가합니다.
     scene.add(star); // 씬에 별을 추가합니다.
   }
+}
+
+function animateStars() {
+  stars.forEach(function (star) {
+    star.position.x -= 0.1; // 원하는 속도와 방향으로 별을 움직입니다.
+    // 만약 별들이 다른 방향으로 움직이길 원한다면, x, y, z 축의 값을 조정하면 됩니다.
+
+    // 만약 별이 화면을 넘어가면 다시 화면 오른쪽으로 옮길 수 있습니다.
+    if (star.position.x < -10) {
+      star.position.x = 10;
+    }
+  });
 }
 
 function spinner() {
@@ -137,6 +155,8 @@ function addExplosion(point) {
 function animate() {
   requestAnimationFrame(animate);
   render();
+
+  animateStars(); // 새롭게 추가된 부분
 
   if (particles.length > 0) {
     particles.forEach(function (elem, index, array) {
@@ -240,7 +260,7 @@ function restartScene() {
     totalTargets += 1;
     level += 1;
   } else {
-    speed = 0.01;
+    speed = 0.005;
     totalTargets = 3;
     level = 1;
   }
@@ -269,7 +289,27 @@ function onWindowResize() {
   render();
 }
 
+// 모달 창 띄우기
+var modal = document.getElementById("modal");
+var startBtn = document.getElementById("startGame");
+var closeBtn = document.getElementsByClassName("close")[0];
+
+startBtn.onclick = function () {
+  modal.style.display = "none"; // 시작 버튼을 누르면 모달이 사라집니다.
+};
+
+closeBtn.onclick = function () {
+  modal.style.display = "none"; // 닫기 버튼을 누르면 모달이 사라집니다.
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none"; // 모달 바깥을 누르면 모달이 사라집니다.
+  }
+};
+
 window.onload = function () {
+  modal.style.display = "block";
   myLevel.innerText = comments[level - 1];
   myScene();
   addHolder();
