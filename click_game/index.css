@@ -13,12 +13,41 @@ canvas {
   position: absolute;
 }
 
-.hud {
-  position: absolute;
-  margin-left: 1em;
+.info-box {
+  background-color: #ffffff; /* 예시로 밝은 회색 배경을 가정 */
+  border-radius: 10px;
+  padding: 20px;
+  display: inline-block;
+  color: #4caf50; /* 검은색 텍스트 색상 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+  max-width: 300px; /* 최대 너비 지정 */
+  margin: 0 auto; /* 가운데 정렬 */
+  border: 2px solid #4caf50;
 }
 
-.hit {
-  font-weight: bold;
-  color: red;
+.hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+#progress-container {
+  width: 70%;
+  background-color: #ddd;
+  margin: 0 auto;
+  border-radius: 5px;
+  height: 20px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  background-color: #4caf50;
+  width: 0;
+  transition: width 0.3s ease-in-out;
 }
