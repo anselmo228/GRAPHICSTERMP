@@ -1,6 +1,14 @@
 // Initialize Three.js scene, camera, and renderer
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+// Use an OrthographicCamera instead of PerspectiveCamera
+var camera = new THREE.OrthographicCamera(
+  window.innerWidth / -2,
+  window.innerWidth / 2,
+  window.innerHeight / 2,
+  window.innerHeight / -2,
+  0.1,
+  1000
+);
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor('#D0CBC7', 1);
@@ -84,7 +92,7 @@ function gameLoop() {
   for (var i = 0; i < missileMeshes.length; i++) {
     missileMeshes[i].position.y -= 5 + time / 500; // Move missile meshes up the screen
 
-    if (missileMeshes[i].position.y < -300) {
+    if (missileMeshes[i].position.y < -100) {
       scene.remove(missileMeshes[i]);
       missileMeshes.splice(i, 1);
       i--;
