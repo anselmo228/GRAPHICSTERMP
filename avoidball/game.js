@@ -1,49 +1,49 @@
 // Initialize Three.js scene, camera, and renderer
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor('#D0CBC7', 1);
 document.body.appendChild(renderer.domElement);
 
 // Define player and missile geometries and materials
-const playerGeometry = new THREE.SphereGeometry(10, 32, 32);
-const playerMaterial = new THREE.MeshPhongMaterial({ color: 0xbcb5df });
-const playerMesh = new THREE.Mesh(playerGeometry, playerMaterial);
+var playerGeometry = new THREE.SphereGeometry(10, 32, 32);
+var playerMaterial = new THREE.MeshPhongMaterial({ color: 0xbcb5df });
+var playerMesh = new THREE.Mesh(playerGeometry, playerMaterial);
 playerMesh.position.set(0, 0, 300); // Adjust player's initial position
 scene.add(playerMesh);
 
-const missileGeometry = new THREE.SphereGeometry(10, 32, 32);
-const missileMaterial = new THREE.MeshPhongMaterial({
+var missileGeometry = new THREE.SphereGeometry(10, 32, 32);
+var missileMaterial = new THREE.MeshPhongMaterial({
   color: 0xbcb5df, // Red color
   specular: 0xffffff, // Specular highlight color
 });
 
 // Create an array to hold missile meshes
-const missileMeshes = [];
+var missileMeshes = [];
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.position.set(0, 499, 0);
 scene.add(directionalLight);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+var ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
 scene.add(ambientLight);
 
-const clock = new THREE.Clock();
+var clock = new THREE.Clock();
 
 // Game state variables
-let gameOver = false;
-let score = 0;
-let time = 0;
-const player = {
+var gameOver = false;
+var score = 0;
+var time = 0;
+var player = {
   x: 0,
   y: 0,
   radius: 20
 };
-const missiles = [];
+var missiles = [];
 
 // Get the score display element
-const scoreDisplay = document.getElementById("score");
+var scoreDisplay = document.getElementById("score");
 
 // Event listeners
 document.addEventListener('keydown', function (event) {
@@ -74,14 +74,14 @@ function gameLoop() {
   time = clock.elapsedTime * 1000;
 
   if (clock.elapsedTime % 10000 === 0) {
-    const x = (Math.random() * 2 - 1) * 300;
-    const missileMesh = new THREE.Mesh(missileGeometry, missileMaterial);
+    var x = (Math.random() * 2 - 1) * 300;
+    var missileMesh = new THREE.Mesh(missileGeometry, missileMaterial);
     missileMesh.position.set(x, 300, 0); // Start missiles at the top of the window
     scene.add(missileMesh);
     missileMeshes.push(missileMesh);
   }
 
-  for (let i = 0; i < missileMeshes.length; i++) {
+  for (var i = 0; i < missileMeshes.length; i++) {
     missileMeshes[i].position.y -= 5 + time / 500; // Move missile meshes up the screen
 
     if (missileMeshes[i].position.y < -300) {
@@ -89,7 +89,7 @@ function gameLoop() {
       missileMeshes.splice(i, 1);
       i--;
     } else {
-      const distance = Math.sqrt(
+      var distance = Math.sqrt(
         Math.pow(playerMesh.position.x - missileMeshes[i].position.x, 2) +
         Math.pow(playerMesh.position.y - missileMeshes[i].position.y, 2)
       );
