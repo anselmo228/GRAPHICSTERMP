@@ -23,7 +23,7 @@ const arrowSize = 50;
 let arrowSpeed = 3;
 const arrows = [];
 const maxLives = 7;
-let score = 90;
+let score = 0;
 let lives = maxLives;
 let isGameOver = false;
 
