@@ -10,8 +10,10 @@ const arrowImages = {
   ArrowRight: new Image(),
 };
 
+let theme = 'MISSION IMPOSSIBLE OST';
 const track1 = './songs/missionimpossible.mp3';
 const track2 = './songs/Pirates of the Caribbean.mp3';
+const track3 = './songs/stranger-things-124008.mp3';
 let currentTrack = track1;
 let song = new Audio(currentTrack);
 const over = new Audio('./songs/gameover.mp3');
@@ -24,6 +26,7 @@ const maxLives = 7;
 let score = 0;
 let lives = maxLives;
 let isGameOver = false;
+showPopup('LEVEL1');
 
 arrowImages.ArrowUp.src = './asets/arrow_up.png';
 arrowImages.ArrowDown.src = './asets/arrow_down.png';
@@ -51,29 +54,78 @@ function updateProgressBar() {
 }
 
 function switchTrack() {
-  if (currentTrack === track1 && score >= 50) {
-    currentTrack = track2;
+  if (currentTrack === track1 && score >= 35) {
+    showPopup('LEVEL2');
+    currentTrack = track3;
     arrowSpeed = 5;
     song.pause();
     song = new Audio(currentTrack);
     song.play();
-
+    theme = 'STRANGER THING OST OST';
+    document.body.style.backgroundImage = 'url("./asets/vision.jpg")';
+  }
+  if (currentTrack === track3 && score >= 65) {
+    showPopup('LEVEL3');
+    currentTrack = track2;
+    arrowSpeed = 7;
+    song.pause();
+    song = new Audio(currentTrack);
+    song.play();
+    theme = 'PIRATES OF THE CARIBBEAN OST';
     document.body.style.backgroundImage = 'url("./asets/vision.jpg")';
   }
 }
+function showPopup(level) {
+  let color = 'black'; 
+
+  if (level === 'GOOD') {
+    color = 'green';
+  } else if (level === 'BAD') {
+    color = 'red';
+  }
+
+  // 모달 요소 생성
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+
+  // 모달 내용 설정
+  modal.innerHTML = `<div class="modal-content">${level}</div>`;
+
+  // 모달 스타일 설정
+  modal.style.position = 'fixed';
+  modal.style.top = '30%';
+  modal.style.left = '50%';
+  modal.style.transform = 'translate(-50%, -50%)';
+  modal.style.backgroundColor = 'white';
+  modal.style.color = color;
+  modal.style.padding = '20px';
+  modal.style.border = '2px solid black';
+  modal.style.borderRadius = '20px';
+
+  // 모달을 body에 추가
+  document.body.appendChild(modal);
+
+  // 1초 후 모달 제거
+  setTimeout(() => {
+    document.body.removeChild(modal);
+  }, 1000);
+}
 
 function increaseSpeed() {
-  if (score >= 60) {
+  if (score >= 20) {
+    arrowSpeed = 4;
+  }
+  if (score >= 40) {
     arrowSpeed = 6;
   }
-  if (score >= 70) {
-    arrowSpeed = 7;
-  }
-  if (score >= 80) {
+  if (score >= 60) {
     arrowSpeed = 8;
   }
-  if (score >= 90) {
+  if (score >= 80) {
     arrowSpeed = 9;
+  }
+  if (score >= 90) {
+    arrowSpeed = 10;
   }
 }
 
@@ -89,6 +141,7 @@ function onKeyDown(event) {
     if (key === arrows[i].key) {
       if (arrows[i].y >= canvas.height - arrowSize && arrows[i].y <= canvas.height - 2) {
         score += 1;
+        showPopup('GOOD');
         arrows.splice(i, 1);
         isHit = true;
         break;
@@ -100,6 +153,7 @@ function onKeyDown(event) {
     for (let i = 0; i < arrows.length; i++) {
       if (arrows[i].y >= canvas.height - arrowSize) {
         lives -= 1;
+        showPopup('BAD');
         arrows.splice(i, 1);
         updateProgressBar();
         break;
@@ -188,7 +242,7 @@ function gameLoop() {
   ctx.fillText('Score: ' + score, 20, 40);
   updateProgressBar();
   ctx.fillStyle = 'white';
-  ctx.fillText('Song: ' + currentTrack, 20, 80);
+  ctx.fillText('Song: ' + theme, 20, 80);
   ctx.fillText('Speed: ' + arrowSpeed, 20, 120);
 
   requestAnimationFrame(gameLoop);
