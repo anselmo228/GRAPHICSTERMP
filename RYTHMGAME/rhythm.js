@@ -23,10 +23,11 @@ const arrowSize = 50;
 let arrowSpeed = 3;
 const arrows = [];
 const maxLives = 7;
-let score = 0;
+let score = 90;
 let lives = maxLives;
 let isGameOver = false;
-showPopup('LEVEL1');
+
+showPopup1('LEVEL1');
 
 arrowImages.ArrowUp.src = './asets/arrow_up.png';
 arrowImages.ArrowDown.src = './asets/arrow_down.png';
@@ -55,7 +56,7 @@ function updateProgressBar() {
 
 function switchTrack() {
   if (currentTrack === track1 && score >= 35) {
-    showPopup('LEVEL2');
+    showPopup1('LEVEL2');
     currentTrack = track3;
     arrowSpeed = 5;
     song.pause();
@@ -65,7 +66,7 @@ function switchTrack() {
     document.body.style.backgroundImage = 'url("./asets/vision.jpg")';
   }
   if (currentTrack === track3 && score >= 65) {
-    showPopup('LEVEL3');
+    showPopup1('LEVEL3');
     currentTrack = track2;
     arrowSpeed = 7;
     song.pause();
@@ -85,30 +86,60 @@ function showPopup(level) {
   }
 
   // 모달 요소 생성
-  const modal = document.createElement('div');
-  modal.className = 'modal';
+  const modal1 = document.createElement('div');
+  modal1.className = 'modal1';
 
   // 모달 내용 설정
-  modal.innerHTML = `<div class="modal-content">${level}</div>`;
+  modal1.innerHTML = `<div class="modal1-content">${level}</div>`;
 
   // 모달 스타일 설정
-  modal.style.position = 'fixed';
-  modal.style.top = '30%';
-  modal.style.left = '50%';
-  modal.style.transform = 'translate(-50%, -50%)';
-  modal.style.backgroundColor = 'white';
-  modal.style.color = color;
-  modal.style.padding = '20px';
-  modal.style.border = '2px solid black';
-  modal.style.borderRadius = '20px';
+  modal1.style.position = 'fixed';
+  modal1.style.top = '30%';
+  modal1.style.left = '50%';
+  modal1.style.transform = 'translate(-50%, -50%)';
+  modal1.style.backgroundColor = 'white';
+  modal1.style.color = color;
+  modal1.style.padding = '20px';
+  modal1.style.border = '2px solid black';
+  modal1.style.borderRadius = '20px';
 
   // 모달을 body에 추가
-  document.body.appendChild(modal);
+  document.body.appendChild(modal1);
 
   // 1초 후 모달 제거
   setTimeout(() => {
-    document.body.removeChild(modal);
+    document.body.removeChild(modal1);
   }, 1000);
+}
+
+function showPopup1(level) {
+  let color = 'white'; 
+
+  // 모달 요소 생성
+  const modal1 = document.createElement('div');
+  modal1.className = 'modal1';
+
+  // 모달 내용 설정
+  modal1.innerHTML = `<div class="modal1-content">${level}</div>`;
+
+  // 모달 스타일 설정
+  modal1.style.position = 'fixed';
+  modal1.style.top = '10%';
+  modal1.style.left = '50%';
+  modal1.style.transform = 'translate(-50%, -50%)';
+  modal1.style.backgroundColor = 'green';
+  modal1.style.color = color;
+  modal1.style.padding = '20px';
+  modal1.style.border = '4px solid black';
+  modal1.style.borderRadius = '40px';
+
+  // 모달을 body에 추가
+  document.body.appendChild(modal1);
+
+  // 1초 후 모달 제거
+  setTimeout(() => {
+    document.body.removeChild(modal1);
+  }, 5000);
 }
 
 function increaseSpeed() {
@@ -174,10 +205,26 @@ function onKeyDown(event) {
 function gameClear() {
   isGameOver = true;
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.font = '50px Arial';
-  ctx.fillStyle = 'green';
-  ctx.fillText('Game Clear!', canvas.width / 2 - 135, canvas.height / 3 - 150);
+  const modal = document.getElementById("modal");
+  const modalContent = document.querySelector(".modal-content");
+
+  // 모달 내용 설정
+  modalContent.innerHTML = `
+    <h2>GAME CLEAR</h2>
+    <p>Your Score: ${score}</p>
+    <button id="tryAgain1">NEXT</button>
+  `;
+
+  // 모달 스타일 설정 (기존 스타일 사용)
+  modal.style.display = "block";
+  modalContent.style.backgroundColor = "#fefefe";
+  modalContent.style.color = "black";
+  modalContent.style.borderRadius = "10px";
+  modalContent.style.display = "block";
+  modalContent.style.margin = "15% auto";
+  modalContent.style.padding = "20px";
+  modalContent.style.border = "1px solid #888";
+  modalContent.style.width = "30%";
   song.pause();
   song.currentTime = 0;
   clear.play();
@@ -186,33 +233,50 @@ function gameClear() {
 function gameOver() {
   isGameOver = true;
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.font = '36px Arial';
-  ctx.fillStyle = 'red';
-  ctx.fillText('Game Over', canvas.width / 2 - 90, canvas.height / 2 - 50);
-  ctx.font = '25px Arial';
-  ctx.fillStyle = 'black';
-  ctx.fillText('Your Score: ' + score, canvas.width / 2 - 75, canvas.height / 2 - 20);
+  // 모달 요소 가져오기
+  const modal = document.getElementById("modal");
+  const modalContent = document.querySelector(".modal-content");
 
-  tryAgainButton.style.display = 'block';
+  // 모달 내용 설정
+  modalContent.innerHTML = `
+    <h2>Game Over</h2>
+    <p>Your Score: ${score}</p>
+    <button id="tryAgain1">Try Again</button>
+  `;
+
+  // 모달 스타일 설정 (기존 스타일 사용)
+  modal.style.display = "block";
+  modalContent.style.backgroundColor = "#fefefe";
+  modalContent.style.color = "black";
+  modalContent.style.borderRadius = "10px";
+  modalContent.style.display = "block";
+  modalContent.style.margin = "15% auto";
+  modalContent.style.padding = "20px";
+  modalContent.style.border = "1px solid #888";
+  modalContent.style.width = "30%";
+
+  const tryAgainButton = document.getElementById('tryAgain1');
+
+  tryAgainButton.addEventListener('click', () => {
+    modal.style.display = "none";
+    isGameOver = false;
+    score = 0;
+    lives = maxLives;
+    arrows.length = 0;
+    updateProgressBar();
+    tryAgainButton.style.display = 'none';
+    currentTrack = track1;
+    arrowSpeed = 3;
+    song = new Audio(currentTrack);
+    document.body.style.backgroundImage = 'url("./asets/vision.jpg")';
+    startGame();
+  });
+ 
   song.pause();
   song.currentTime = 0;
   over.play();
 }
 
-tryAgainButton.addEventListener('click', () => {
-  isGameOver = false;
-  score = 0;
-  lives = maxLives;
-  arrows.length = 0;
-  updateProgressBar();
-  tryAgainButton.style.display = 'none';
-  currentTrack = track1;
-  arrowSpeed = 3;
-  song = new Audio(currentTrack);
-  document.body.style.backgroundImage = 'url("./asets/gachon.jpg")';
-  startGame();
-});
 
 function gameLoop() {
   if (isGameOver) {
@@ -260,4 +324,29 @@ function startGame() {
   gameLoop();
 }
 
-startGame();
+// 모달 창 띄우기
+var modal = document.getElementById("modal");
+var startBtn = document.getElementById("startGame");
+var closeBtn = document.getElementsByClassName("close")[0];
+
+startBtn.onclick = function () {
+  modal.style.display = "none"; // 시작 버튼을 누르면 모달이 사라집니다.
+  startGame();
+};
+
+closeBtn.onclick = function () {
+  modal.style.display = "none"; // 닫기 버튼을 누르면 모달이 사라집니다.
+  startGame();
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none"; // 모달 바깥을 누르면 모달이 사라집니다.
+    startGame();
+  }
+};
+
+window.onload = function () {
+  modal.style.display = "block";
+  window.addEventListener("resize", onWindowResize, false);
+};
