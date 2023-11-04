@@ -1,0 +1,400 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 712,
+      "max": [
+        0.03013073280453682,
+        2.0403406620025635,
+        2.0403406620025635
+      ],
+      "min": [
+        -0.3960314393043518,
+        -2.0403406620025635,
+        -2.0403406620025635
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 8544,
+      "componentType": 5126,
+      "count": 712,
+      "max": [
+        0.999462366104126,
+        0.9984524846076965,
+        0.9984524846076965
+      ],
+      "min": [
+        -0.9999573230743408,
+        -0.9984524846076965,
+        -0.9984524846076965
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 712,
+      "max": [
+        0.9967181086540222,
+        0.9404861927032471
+      ],
+      "min": [
+        0.004357318393886089,
+        0.014511852525174618
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 3072,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 17088,
+      "componentType": 5126,
+      "count": 300,
+      "max": [
+        10.039610862731934,
+        1.6172930002212524,
+        1.0012227296829224
+      ],
+      "min": [
+        -1.0,
+        -1.753899335861206,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 20688,
+      "componentType": 5126,
+      "count": 300,
+      "max": [
+        0.9892208576202393,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -0.7462007999420166,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 5696,
+      "componentType": 5126,
+      "count": 300,
+      "max": [
+        0.9336961507797241,
+        0.9899285435676575
+      ],
+      "min": [
+        0.012018270790576935,
+        0.013946962542831898
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 12288,
+      "componentType": 5125,
+      "count": 978,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 73,
+      "max": [
+        1.5
+      ],
+      "min": [
+        0.0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 73,
+      "max": [
+        1.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "min": [
+        -0.8386706113815308,
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "type": "VEC4"
+    }
+  ],
+  "animations": [
+    {
+      "channels": [
+        {
+          "sampler": 0,
+          "target": {
+            "node": 4,
+            "path": "rotation"
+          }
+        }
+      ],
+      "name": "Plane|PlaneAction.001",
+      "samplers": [
+        {
+          "input": 8,
+          "interpolation": "LINEAR",
+          "output": 9
+        }
+      ]
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "James.Pham (https://sketchfab.com/James.Pham)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/pinwheel-4893025869a34c92896282386d83788e",
+      "title": "Pinwheel"
+    },
+    "generator": "Sketchfab-12.67.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 16200,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 8096,
+      "byteOffset": 16200,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 24288,
+      "byteOffset": 24296,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 292,
+      "byteOffset": 48584,
+      "name": "floatBufferViews"
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1168,
+      "byteOffset": 48876,
+      "byteStride": 16,
+      "name": "floatBufferViews"
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 50044,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/PinWheel_baseColor.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "PinWheel",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.8211145618000169
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Plane_PinWheel_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Cylinder_PinWheel_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        -1.4451339541717394e-18,
+        1.4451339541717394e-18,
+        -0.006508304737508297,
+        0.0,
+        -0.006508304737508297,
+        -3.2088419791781217e-34,
+        1.4451339541717394e-18,
+        0.0,
+        0.0,
+        0.006508304737508297,
+        1.4451339541717394e-18,
+        0.0,
+        15.478363037109375,
+        -9.996378898620609,
+        15.478013992309569,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "aaad12b7313a4031a02db4353305adc6.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "Object_2"
+    },
+    {
+      "children": [
+        4,
+        6
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5
+      ],
+      "name": "Plane",
+      "rotation": [
+        0.2588190734386444,
+        -0.0,
+        -0.0,
+        0.9659258127212524
+      ],
+      "scale": [
+        -72.0,
+        -72.00000762939453,
+        -72.00000762939453
+      ]
+    },
+    {
+      "mesh": 0,
+      "name": "Plane_PinWheel_0"
+    },
+    {
+      "children": [
+        7
+      ],
+      "name": "Cylinder",
+      "rotation": [
+        -3.090862321641907e-08,
+        0.7071068286895752,
+        0.7071067094802856,
+        -3.0908616110991716e-08
+      ],
+      "scale": [
+        4.072643280029297,
+        4.072643280029297,
+        198.84136962890625
+      ],
+      "translation": [
+        33.88581848144531,
+        -192.2278594970703,
+        0.0
+      ]
+    },
+    {
+      "mesh": 1,
+      "name": "Cylinder_PinWheel_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ]
+}

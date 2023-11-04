@@ -1,0 +1,11 @@
+Model Information:
+* title:	Log Stump
+* source:	https://sketchfab.com/3d-models/log-stump-3ca0c58f7ffe49d4a8ce4b87905510e2
+* author:	Kon (https://sketchfab.com/Mafrts852901e8ab5e4160)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Log Stump" (https://sketchfab.com/3d-models/log-stump-3ca0c58f7ffe49d4a8ce4b87905510e2) by Kon (https://sketchfab.com/Mafrts852901e8ab5e4160) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

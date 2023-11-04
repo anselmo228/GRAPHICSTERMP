@@ -1,0 +1,11 @@
+Model Information:
+* title:	Pinwheel
+* source:	https://sketchfab.com/3d-models/pinwheel-4893025869a34c92896282386d83788e
+* author:	James.Pham (https://sketchfab.com/James.Pham)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Pinwheel" (https://sketchfab.com/3d-models/pinwheel-4893025869a34c92896282386d83788e) by James.Pham (https://sketchfab.com/James.Pham) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
