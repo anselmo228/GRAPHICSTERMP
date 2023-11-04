@@ -1,11 +1,11 @@
 Model Information:
-* title:	Texture Cube - Free Download
-* source:	https://sketchfab.com/3d-models/texture-cube-free-download-f93e2573b7594c1b98246d764dd6d3b6
-* author:	3dprintinglady (https://sketchfab.com/3dprintinglady)
+* title:	Testing Texture Cube
+* source:	https://sketchfab.com/3d-models/testing-texture-cube-dabce14d2c604d9baea755a29fc5d01a
+* author:	Navis (https://sketchfab.com/NavisSAE)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Texture Cube - Free Download" (https://sketchfab.com/3d-models/texture-cube-free-download-f93e2573b7594c1b98246d764dd6d3b6) by 3dprintinglady (https://sketchfab.com/3dprintinglady) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "Testing Texture Cube" (https://sketchfab.com/3d-models/testing-texture-cube-dabce14d2c604d9baea755a29fc5d01a) by Navis (https://sketchfab.com/NavisSAE) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

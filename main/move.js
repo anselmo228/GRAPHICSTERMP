@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x87ceeb); // 배경색 하늘색으로
   const camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -12,9 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
   //바닥 이미지
   const textureLoader = new THREE.TextureLoader();
   const floorTexture = textureLoader.load("../images/ground.png");
-
-  const medicalTexture = textureLoader.load("../images/medical.png");
-  const gachonTexture = textureLoader.load("../images/gachon.png");
 
   floorTexture.wrapS = THREE.RepeatWrapping;
   floorTexture.wrapT = THREE.RepeatWrapping;
@@ -36,35 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
   scene.add(spaceMesh);
   meshes.push(spaceMesh);
 
-  //메디컬 Mesh
-  const medicalMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(6, 10),
-    new THREE.MeshStandardMaterial({
-      map: medicalTexture,
-      transparent: true,
-      opacity: 1.0,
-      color: "ffffff",
-    })
-  );
-  medicalMesh.name = "medical";
-  medicalMesh.position.set(3, -3.5, -3.5);
-  medicalMesh.rotation.x = -Math.PI / 2;
-  medicalMesh.receiveShadow = true;
-  scene.add(medicalMesh);
-
-  // //바닥 생성
-  // const groundGeometry = new THREE.PlaneGeometry(20, 20); // 바닥 크기 설정
-  // const groundMaterial = new THREE.MeshBasicMaterial({
-  //   color: 0xffffff,
-  //   roughness: 0.8,
-  //   metalness: 0.2,
-  // }); // 바닥 색상 설정
-  // const ground = new THREE.Mesh(groundGeometry, groundMaterial);
-  // ground.position.set(0, -3.5, 0);
-  // ground.rotation.x = -Math.PI / 2; // 바닥을 수평으로 배치
-  // ground.receiveShadow = true; // 바닥에 그림자 투사
-  // scene.add(ground);
-
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById("scene-container").appendChild(renderer.domElement);
 
@@ -75,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let rotationSpeed = 0.2; // 회전 속도
   let movementSpeed = 0.2; // 이동 속도
 
+  // 무당이 //
   loader.load("../model/mudang.gltf", (gltf) => {
     character = gltf.scene;
     scene.add(character);
@@ -82,14 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
     character.position.set(0, 0, 0);
     character.castShadow = true;
     character.receiveShadow = true;
-
-    // const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    // directionalLight.position.set(1, 1, 1);
-    // character.add(directionalLight);
-
-    // const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1);
-    // directionalLight2.position.set(-1, -1, -1);
-    // character.add(directionalLight2);
 
     const directionalLight = new THREE.DirectionalLight("white", 0.7);
     const directionalLightOriginPosition = new THREE.Vector3(1, 1, 1);
@@ -122,10 +84,80 @@ document.addEventListener("DOMContentLoaded", function () {
     camera.lookAt(character.position);
 
     animate();
+  
   });
+
+  // 통나무 //
+  loader.load("../model/log_stump/scene.gltf", (gltf) => {
+    const log_stump = gltf.scene.children[0];
+    scene.add(log_stump);
+  
+    log_stump.position.set(5, 0, 5); //위치 설정 (x,y,z)
+    log_stump.scale.set(0.01, 0.01, 0.01); // 크기 조절
+    log_stump.castShadow = true;
+    log_stump.receiveShadow = true;
+  
+    animate(); 
+  });
+
+  // 깃발 //
+  loader.load("../model/flag/scene.gltf", (gltf) => {
+    const flag = gltf.scene;
+    scene.add(flag);
+  
+    flag.position.set(6, 0, 5);
+    flag.scale.set(0.5, 0.5, 0.5); 
+    flag.castShadow = true;
+    flag.receiveShadow = true;
+  
+    animate(); 
+  });
+
+  // 큐브 ( AI 공학관 ) //
+  loader.load("../model/cube/scene.gltf", (gltf) => {
+    const cube = gltf.scene;
+    scene.add(cube);
+  
+    cube.position.set(5, 0, 5); 
+    cube.scale.set(0.05, 0.05, 0.05); 
+    cube.castShadow = true;
+    cube.receiveShadow = true;
+  
+    animate(); 
+  });
+
+  // 바람개비 ( 바람개비 동산 ) //
+  loader.load("../model/pinwheel/scene.gltf", (gltf) => {
+    const pinwheel = gltf.scene;
+    scene.add(pinwheel);
+  
+    pinwheel.position.set(0, 0, 0); 
+    pinwheel.scale.set(0.01, 0.01, 0.01); 
+    pinwheel.castShadow = true;
+    pinwheel.receiveShadow = true;
+  
+    animate(); 
+  });
+
+  // 무한대 ( 가천관 ) //
+  loader.load("../model/infinity_loop/scene.gltf", (gltf) => {
+    const infinity_loop = gltf.scene;
+    scene.add(infinity_loop);
+  
+    infinity_loop.position.set(2, 3.5, 0); 
+    infinity_loop.scale.set(0.01, 0.01, 0.01); 
+    infinity_loop.castShadow = true;
+    infinity_loop.receiveShadow = true;
+
+    infinity_loop.rotation.z = Math.PI / 2;
+  
+    animate(); 
+  });
+
 
   let rotationAngle = 0; // 현재 회전 각도
 
+  // 무당이 조작 //
   document.addEventListener("keydown", (event) => {
     switch (event.key) {
       case "w":
@@ -156,7 +188,6 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
     }
   });
-
   document.addEventListener("keyup", (event) => {
     // 키 안 눌렀을 때 멈추기
     mixer.timeScale = 0;
@@ -180,3 +211,5 @@ document.addEventListener("DOMContentLoaded", function () {
     renderer.render(scene, camera);
   }
 });
+
+
