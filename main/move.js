@@ -84,76 +84,74 @@ document.addEventListener("DOMContentLoaded", function () {
     camera.lookAt(character.position);
 
     animate();
-  
   });
 
   // 통나무 //
   loader.load("../model/log_stump/scene.gltf", (gltf) => {
     const log_stump = gltf.scene.children[0];
     scene.add(log_stump);
-  
+
     log_stump.position.set(5, 0, 5); //위치 설정 (x,y,z)
     log_stump.scale.set(0.01, 0.01, 0.01); // 크기 조절
     log_stump.castShadow = true;
     log_stump.receiveShadow = true;
-  
-    animate(); 
+
+    animate();
   });
 
   // 깃발 //
   loader.load("../model/flag/scene.gltf", (gltf) => {
     const flag = gltf.scene;
     scene.add(flag);
-  
+
     flag.position.set(6, 0, 5);
-    flag.scale.set(0.5, 0.5, 0.5); 
+    flag.scale.set(0.5, 0.5, 0.5);
     flag.castShadow = true;
     flag.receiveShadow = true;
-  
-    animate(); 
+
+    animate();
   });
 
   // 큐브 ( AI 공학관 ) //
   loader.load("../model/cube/scene.gltf", (gltf) => {
     const cube = gltf.scene;
     scene.add(cube);
-  
-    cube.position.set(5, 0, 5); 
-    cube.scale.set(0.05, 0.05, 0.05); 
+
+    cube.position.set(5, 0, 5);
+    cube.scale.set(0.05, 0.05, 0.05);
     cube.castShadow = true;
     cube.receiveShadow = true;
-  
-    animate(); 
+
+    animate();
   });
 
   // 바람개비 ( 바람개비 동산 ) //
   loader.load("../model/pinwheel/scene.gltf", (gltf) => {
     const pinwheel = gltf.scene;
     scene.add(pinwheel);
-  
-    pinwheel.position.set(0, 0, 0); 
-    pinwheel.scale.set(0.01, 0.01, 0.01); 
+
+    pinwheel.position.set(0, 0, 0);
+    pinwheel.scale.set(0.01, 0.01, 0.01);
     pinwheel.castShadow = true;
     pinwheel.receiveShadow = true;
-  
-    animate(); 
+
+    animate();
   });
 
   // 무한대 ( 가천관 ) //
   loader.load("../model/infinity_loop/scene.gltf", (gltf) => {
     const infinity_loop = gltf.scene;
     scene.add(infinity_loop);
-  
-    infinity_loop.position.set(2, 3.5, 0); 
-    infinity_loop.scale.set(0.01, 0.01, 0.01); 
+
+    infinity_loop.position.set(2, 3.5, 0);
+    infinity_loop.scale.set(0.01, 0.01, 0.01);
     infinity_loop.castShadow = true;
     infinity_loop.receiveShadow = true;
 
     infinity_loop.rotation.z = Math.PI / 2;
-  
-    animate(); 
-  });
 
+    animate();
+  });
 
   let rotationAngle = 0; // 현재 회전 각도
 
@@ -211,5 +209,3 @@ document.addEventListener("DOMContentLoaded", function () {
     renderer.render(scene, camera);
   }
 });
-
-
