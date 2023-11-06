@@ -99,13 +99,15 @@ document.addEventListener("DOMContentLoaded", function () {
     animate();
   });
 
-  // 깃발 //
+  // 깃발 //w
   loader.load("../model/flag/scene.gltf", (gltf) => {
     const flag = gltf.scene;
     scene.add(flag);
 
     flag.position.set(6, 0, 5);
-    flag.scale.set(0.5, 0.5, 0.5);
+
+    flag.scale.set(1, 1, 1); 
+
     flag.castShadow = true;
     flag.receiveShadow = true;
 
@@ -116,9 +118,10 @@ document.addEventListener("DOMContentLoaded", function () {
   loader.load("../model/cube/scene.gltf", (gltf) => {
     const cube = gltf.scene;
     scene.add(cube);
+  
+    cube.position.set(-5, 0, 5); 
+    cube.scale.set(30, 30, 30); 
 
-    cube.position.set(5, 0, 5);
-    cube.scale.set(0.05, 0.05, 0.05);
     cube.castShadow = true;
     cube.receiveShadow = true;
 
@@ -130,8 +133,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const pinwheel = gltf.scene;
     scene.add(pinwheel);
 
-    pinwheel.position.set(0, 0, 0);
-    pinwheel.scale.set(0.01, 0.01, 0.01);
+
+    pinwheel.position.set(7, 0, 5); 
+    pinwheel.scale.set(30, 30, 30); 
+
     pinwheel.castShadow = true;
     pinwheel.receiveShadow = true;
 
@@ -160,14 +165,14 @@ document.addEventListener("DOMContentLoaded", function () {
     switch (event.key) {
       case "w":
         // w 키 : 전진
-        mixer.timeScale = 1.5;
+        mixer.timeScale = 3;
         mixer.clipAction(mixer._actions[0].getClip()).play();
         character.position.x += Math.sin(rotationAngle) * movementSpeed;
         character.position.z += Math.cos(rotationAngle) * movementSpeed;
         break;
       case "s":
         // s 키 : 후진
-        mixer.timeScale = -1.5;
+        mixer.timeScale = -3;
         mixer.clipAction(mixer._actions[0].getClip()).play();
         character.position.x -= Math.sin(rotationAngle) * movementSpeed;
         character.position.z -= Math.cos(rotationAngle) * movementSpeed;
