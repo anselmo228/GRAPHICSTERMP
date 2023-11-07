@@ -3,10 +3,6 @@ var myLevel = document.getElementById("level");
 var myScore = document.getElementById("score");
 var progressBar = document.getElementById("progress-bar");
 
-var modal = document.getElementById("modal");
-var startBtn = document.getElementById("startGame");
-var closeBtn = document.getElementsByClassName("close")[0];
-
 // Initialize Three.js scene, camera, and renderer
 var scene = new THREE.Scene();
 
@@ -81,7 +77,7 @@ var level = 1;
 var totalLevels = 3; // level 수를 3으로 수정합니다.
 var score = 0;
 var speed = 800;
-var maxScore = 1000;
+var maxScore = 500;
 
 document.addEventListener('mousemove', function (event) {
   if (!gameOver) {
@@ -109,11 +105,18 @@ document.addEventListener('mousemove', function (event) {
 
 // Game loop
 function gameLoop() {
+
   if (gameOver) {
     score = 0;
     gameOver = false;
     restartScene();
+
+    if (level == 1) {
+      modal2.style.display = "block";
+      myLevel.innerText = comments[level - 1];
+    }
   }
+
 
   if(score < maxScore){
     if (time % 50 == 0) {  // Create a missile every 1000 milliseconds (1 second)
@@ -179,32 +182,20 @@ function gameLoop() {
         }
       }
     }
-
-    if (score < maxScore) {
-      myScore.innerHTML =
-        "<span class='hit'></span> Score: " + score + "/" + maxScore;
-    } else {
-      gameOver = true;
-
-      if (level < totalLevels) {
-        myScore.innerHTML =
-          "<strong>You got 'em all!</strong> Click the screen for level " +
-          (level + 1) +
-          ".";
-      } else {
-        myScore.innerHTML =
-          "<strong>You win!</strong> Click the screen to play again.";
-      }
-    }
-    updateProgressBar(); // 여기서 호출
-  
-    // Render the scene
-    renderer.render(scene, camera);
-  
-    // Request the next frame
-    requestAnimationFrame(gameLoop);
   }
 
+  if (score < maxScore) {
+    myScore.innerHTML =
+          "<span class='hit'></span> Score: " + score + "/" + maxScore;
+  } else {
+    gameOver = true;
+  }
+  updateProgressBar(); // 여기서 호출
+
+  // Render the scene
+  renderer.render(scene, camera);
+  // Request the next frame
+  requestAnimationFrame(gameLoop);
 }
 
 function restartScene() {
@@ -216,7 +207,7 @@ function restartScene() {
     level += 1;
   } else {
     speed = 100;
-    totalTargets = 1000;
+    maxScore = 500;
     level = 1;
   }
 
@@ -231,26 +222,40 @@ function updateProgressBar() {
 
 
 // 모달 창 띄우기
-var modal = document.getElementById("modal");
+var modal1 = document.getElementById("modal1");
+var modal2 = document.getElementById("modal2");
 var startBtn = document.getElementById("startGame");
-var closeBtn = document.getElementsByClassName("close")[0];
+var restartBtn = document.getElementById("RestartGame");
+var closeBtn1 = document.getElementsByClassName("close1")[0];
+var closeBtn2 = document.getElementsByClassName("close2")[0];
 
 startBtn.onclick = function () {
-  modal.style.display = "none"; // 시작 버튼을 누르면 모달이 사라집니다.
+  modal1.style.display = "none"; // 시작 버튼을 누르면 모달이 사라집니다.
 };
 
-closeBtn.onclick = function () {
-  modal.style.display = "none"; // 닫기 버튼을 누르면 모달이 사라집니다.
+restartBtn.onclick = function () {
+  modal2.style.display = "none"; // 시작 버튼을 누르면 모달이 사라집니다.
+};
+
+closeBtn1.onclick = function () {
+  modal1.style.display = "none"; // 닫기 버튼을 누르면 모달이 사라집니다.
+};
+
+closeBtn2.onclick = function () {
+  modal2.style.display = "none"; // 닫기 버튼을 누르면 모달이 사라집니다.
 };
 
 window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none"; // 모달 바깥을 누르면 모달이 사라집니다.
+  if (event.target == modal1) {
+    modal1.style.display = "none"; // 모달 바깥을 누르면 모달이 사라집니다.
+  }
+  if (event.target == modal2) {
+    modal2.style.display = "none"; // 모달 바깥을 누르면 모달이 사라집니다.
   }
 };
 
 window.onload = function () {
-  modal.style.display = "block";
+  modal1.style.display = "block";
   myLevel.innerText = comments[level - 1];
 
   // Set up camera position
