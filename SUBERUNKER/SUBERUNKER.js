@@ -75,6 +75,7 @@ var totalLevels = 3; // level 수를 3으로 수정합니다.
 var score = 0;
 var speed = 800;
 var maxScore = 500;
+var waitForRestart = true; // Add a flag to control waiting for restart
 
 document.addEventListener('mousemove', function (event) {
   if (!gameOver) {
@@ -102,6 +103,10 @@ document.addEventListener('mousemove', function (event) {
 // Game loop
 function gameLoop() {
 
+  if (waitForRestart) {
+    return; // If waiting for restart, do not continue the game loop
+  }
+
   if (gameOver) {
     score = 0;
     gameOver = false;
@@ -110,6 +115,7 @@ function gameLoop() {
     if (level == 1) {
       modal2.style.display = "block";
       myLevel.innerText = comments[level - 1];
+      waitForRestart = true; // Set the flag to wait for restart
     }
   }
 
@@ -226,10 +232,14 @@ var closeBtn2 = document.getElementsByClassName("close2")[0];
 
 startBtn.onclick = function () {
   modal1.style.display = "none"; // 시작 버튼을 누르면 모달이 사라집니다.
+  waitForRestart = false; // Reset the flag when restart button is clicked
+  restartGame();
 };
 
 restartBtn.onclick = function () {
   modal2.style.display = "none"; // 시작 버튼을 누르면 모달이 사라집니다.
+  waitForRestart = false; // Reset the flag when restart button is clicked
+  restartGame();
 };
 
 closeBtn1.onclick = function () {
@@ -248,6 +258,15 @@ window.onclick = function (event) {
     modal2.style.display = "none"; // 모달 바깥을 누르면 모달이 사라집니다.
   }
 };
+
+function restartGame() {
+  waitForRestart = false; // Reset the flag when restart game is called
+  missileMeshes.forEach(mesh => scene.remove(mesh));
+  scoreMeshes.forEach(mesh => scene.remove(mesh));
+  missileMeshes = [];
+  scoreMeshes = [];
+  requestAnimationFrame(gameLoop);
+}
 
 window.onload = function () {
   modal1.style.display = "block";
