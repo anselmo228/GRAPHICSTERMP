@@ -25,7 +25,6 @@ var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("webgl-container").appendChild(renderer.domElement);
 
-
 // Define player and missile geometries and materials
 var playerGeometry = new THREE.SphereGeometry(10, 32, 32);
 var playerMaterial = new THREE.MeshPhongMaterial({
@@ -35,8 +34,6 @@ var playerMaterial = new THREE.MeshPhongMaterial({
 var playerMesh = new THREE.Mesh(playerGeometry, playerMaterial);
 playerMesh.position.set(0, 0, 300); // Adjust player's initial position
 scene.add(playerMesh);
-
-
 
 var missileGeometry = new THREE.SphereGeometry(5, 32, 32);
 var missileMaterial = new THREE.MeshPhongMaterial({
@@ -102,7 +99,6 @@ document.addEventListener('mousemove', function (event) {
   }
 });
 
-
 // Game loop
 function gameLoop() {
 
@@ -116,7 +112,6 @@ function gameLoop() {
       myLevel.innerText = comments[level - 1];
     }
   }
-
 
   if(score < maxScore){
     if (time % 50 == 0) {  // Create a missile every 1000 milliseconds (1 second)
@@ -206,7 +201,7 @@ function restartScene() {
     maxScore += 500;
     level += 1;
   } else {
-    speed = 100;
+    speed = 800;
     maxScore = 500;
     level = 1;
   }
@@ -260,6 +255,7 @@ window.onload = function () {
 
   // Set up camera position
   camera.position.z = 600;
+
   // Start the game loop
   requestAnimationFrame(gameLoop);
 };
