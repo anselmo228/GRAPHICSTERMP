@@ -10,19 +10,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
 
-  //바닥 이미지
   const textureLoader = new THREE.TextureLoader();
-  const floorTexture = textureLoader.load("../images/ground.png");
+  const floorTexture = textureLoader.load("../images/ground.png"); // 바닥 이미지
+  const roadTexture = textureLoader.load("../images/road.png"); // 길 이미지
 
   floorTexture.wrapS = THREE.RepeatWrapping;
   floorTexture.wrapT = THREE.RepeatWrapping;
   floorTexture.repeat.x = 10;
   floorTexture.repeat.y = 10;
 
-  //바닥 풀 Mesh
+  // 바닥 //
   const meshes = [];
   const spaceMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(150, 150),
+    new THREE.PlaneGeometry(150, 150), // 크기조절
     new THREE.MeshStandardMaterial({
       map: floorTexture,
     })
@@ -36,6 +36,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById("scene-container").appendChild(renderer.domElement);
+
+  // 길 //
+  function createRoad(x, y, z) {
+    const roadMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(30, 15), // 크기 조절
+      new THREE.MeshStandardMaterial({
+        map: roadTexture,
+        transparent: true,
+        alphaTest: 0.5,
+      })
+    );
+    roadMesh.position.set(x, y, z);
+    roadMesh.rotation.x = -Math.PI / 2;
+    scene.add(roadMesh);
+  }
+  createRoad(0, -3.4, 0);
+  createRoad(30, -3.4, 0);
+  createRoad(60, -3.4, 0); // 이어붙여놨음
 
   const loader = new THREE.GLTFLoader();
   let character;
@@ -99,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     animate();
   });
 
-  // 깃발 //w
+  // 깃발 //
   loader.load("../model/flag/scene.gltf", (gltf) => {
     const flag = gltf.scene;
     scene.add(flag);
