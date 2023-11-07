@@ -10,29 +10,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
 
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.minDistance = 20;
+  controls.maxDistance = 800;
+  controls.update();
+
   //바닥 이미지
   const textureLoader = new THREE.TextureLoader();
-  const floorTexture = textureLoader.load("../images/ground.png");
+  const skyMeterialArray = [];
+  const texture_ft = new THREE.TextureLoader().load("../background/ft.jpg");
+  const texture_bk = new THREE.TextureLoader().load("../background/bk.jpg");
+  const texture_up = new THREE.TextureLoader().load("../background/up.jpg");
+  const texture_dn = new THREE.TextureLoader().load("../background/dn.jpg");
+  const texture_rt = new THREE.TextureLoader().load("../background/rt.jpg");
+  const texture_lf = new THREE.TextureLoader().load("../background/lf.jpg");
 
-  floorTexture.wrapS = THREE.RepeatWrapping;
-  floorTexture.wrapT = THREE.RepeatWrapping;
-  floorTexture.repeat.x = 10;
-  floorTexture.repeat.y = 10;
-
-  //바닥 풀 Mesh
-  const meshes = [];
-  const spaceMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(150, 150),
+  skyMeterialArray.push(
     new THREE.MeshStandardMaterial({
-      map: floorTexture,
+      map: texture_ft,
     })
   );
-  spaceMesh.name = "floor";
-  spaceMesh.position.set(0, -3.5, 0);
-  spaceMesh.rotation.x = -Math.PI / 2;
-  spaceMesh.receiveShadow = true;
-  scene.add(spaceMesh);
-  meshes.push(spaceMesh);
+  skyMeterialArray.push(
+    new THREE.MeshStandardMaterial({
+      map: texture_bk,
+    })
+  );
+  skyMeterialArray.push(
+    new THREE.MeshStandardMaterial({
+      map: texture_up,
+    })
+  );
+  skyMeterialArray.push(
+    new THREE.MeshStandardMaterial({
+      map: texture_dn,
+    })
+  );
+  skyMeterialArray.push(
+    new THREE.MeshStandardMaterial({
+      map: texture_rt,
+    })
+  );
+  skyMeterialArray.push(
+    new THREE.MeshStandardMaterial({
+      map: texture_lf,
+    })
+  );
+  for (let i = 0; i < 6; i++) {
+    skyMeterialArray[i].side = THREE.BackSide;
+  }
+  const skyboxGeo = new THREE.BoxGeometry(100, 100, 100);
+  const sky = new THREE.Mesh(skyboxGeo, skyMeterialArray);
+  scene.add(sky);
 
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById("scene-container").appendChild(renderer.domElement);
@@ -49,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     character = gltf.scene;
     scene.add(character);
 
-    character.position.set(0, 0, 0);
+    character.position.set(0, -45, 0);
     character.castShadow = true;
     character.receiveShadow = true;
 
@@ -91,10 +120,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const log_stump = gltf.scene.children[0];
     scene.add(log_stump);
 
-    log_stump.position.set(5, 0, 5); //위치 설정 (x,y,z)
+    log_stump.position.set(5, -3.5, 5); //위치 설정 (x,y,z)
     log_stump.scale.set(0.01, 0.01, 0.01); // 크기 조절
     log_stump.castShadow = true;
     log_stump.receiveShadow = true;
+
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+
+    light.position.set(5, 0, 5);
+
+    light.castShadow = true;
+
+    scene.add(light);
 
     animate();
   });
@@ -106,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     flag.position.set(6, 0, 5);
 
-    flag.scale.set(1, 1, 1); 
+    flag.scale.set(1, 1, 1);
 
     flag.castShadow = true;
     flag.receiveShadow = true;
@@ -118,9 +155,9 @@ document.addEventListener("DOMContentLoaded", function () {
   loader.load("../model/cube/scene.gltf", (gltf) => {
     const cube = gltf.scene;
     scene.add(cube);
-  
-    cube.position.set(-5, 0, 5); 
-    cube.scale.set(30, 30, 30); 
+
+    cube.position.set(-5, 0, 5);
+    cube.scale.set(30, 30, 30);
 
     cube.castShadow = true;
     cube.receiveShadow = true;
@@ -133,9 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const pinwheel = gltf.scene;
     scene.add(pinwheel);
 
-
-    pinwheel.position.set(7, 0, 5); 
-    pinwheel.scale.set(30, 30, 30); 
+    pinwheel.position.set(7, 0, 5);
+    pinwheel.scale.set(30, 30, 30);
 
     pinwheel.castShadow = true;
     pinwheel.receiveShadow = true;
@@ -208,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 모델의 애니메이션 업데이트
     if (mixer) {
-      mixer.update(0.03); //애니메이션 재생 속도
+      mixer.update(0.003); //애니메이션 재생 속도
     }
 
     renderer.render(scene, camera);
