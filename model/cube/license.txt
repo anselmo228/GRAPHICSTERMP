@@ -1,11 +1,11 @@
 Model Information:
-* title:	Testing Texture Cube
-* source:	https://sketchfab.com/3d-models/testing-texture-cube-dabce14d2c604d9baea755a29fc5d01a
-* author:	Navis (https://sketchfab.com/NavisSAE)
+* title:	Hallow Cube
+* source:	https://sketchfab.com/3d-models/hallow-cube-b702b517a0d3499fb0cb9b92b7bb413d
+* author:	Jovian Blaze (https://sketchfab.com/Jovian_Blaze)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Testing Texture Cube" (https://sketchfab.com/3d-models/testing-texture-cube-dabce14d2c604d9baea755a29fc5d01a) by Navis (https://sketchfab.com/NavisSAE) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "Hallow Cube" (https://sketchfab.com/3d-models/hallow-cube-b702b517a0d3499fb0cb9b92b7bb413d) by Jovian Blaze (https://sketchfab.com/Jovian_Blaze) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
