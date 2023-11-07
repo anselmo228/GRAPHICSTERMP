@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const textureLoader = new THREE.TextureLoader();
   const floorTexture = textureLoader.load("../images/ground.png");
   const roadTexture = textureLoader.load("../images/road.png");
+  const infin = new THREE.Vector3(50, 0, 0); // 무한대
+  const cu = new THREE.Vector3(-50, 0, 0); // 큐브
+  const proximityThreshold = 5.0; // Set the proximity threshold within which the action will be triggered
 
   floorTexture.wrapS = THREE.RepeatWrapping;
   floorTexture.wrapT = THREE.RepeatWrapping;
@@ -274,6 +277,20 @@ document.addEventListener("DOMContentLoaded", function () {
       mixer.update(delta / 2); // 애니메이션 재생 속도
     }
 
+    if (character) {
+      const distance = character.position.distanceTo(infin);
+      const distance1 = character.position.distanceTo(cu)
+      if (distance < proximityThreshold) {
+        // The character is within the proximity threshold of the target location, trigger the new HTML page here.
+        window.location.href = '../loading/loading.html'; // Replace 'loading.html' with the desired URL.
+        return; // Stop further animation if you want to switch pages immediately.
+      }
+      if (distance1 < proximityThreshold) {
+        // The character is within the proximity threshold of the target location, trigger the new HTML page here.
+        window.location.href = '../RYTHMGAME/loading/loading.html'; // Replace 'loading.html' with the desired URL.
+        return; // Stop further animation if you want to switch pages immediately.
+      }
+    }
     renderer.render(scene, camera);
   }
 });

@@ -1,7 +1,7 @@
 window.onload = function () {
   setTimeout(() => {
     window.location.href =
-    ' ../click_game/index.html';
+    ' ../RYTHMGAME/rhythm.html';
  }, 4000); // 4초 후 게임 페이지로 이동
 };
 
