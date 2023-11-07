@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>avoid ball</title>
+    <link rel="stylesheet" href="SUBERUNKER.css" />
+    <title>Your Webpage</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="score">Score: 0</div>
+    <script type="text/javascript" src="three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/20.0.0/tween.umd.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+    <body>
+      <div class="container">
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Welcome to the Game!</h2>
+            <p>move the mouse to eat yellow balls!
+            <br>avoid green balls!
+            </p>
+            <button id="startGame">Start Game</button>
+          </div>
+        </div>
+        <div class="hud">
+          <div class="info-box">
+            <h1 id="level"></h1>
+            <p id="score"></p>
+          </div>
+          <div id="progress-container">
+            <div id="progress-bar"></div>
+          </div>
+        </div>
+        <div id="webgl-container"></div>
+      </div>
+    <script src="SUBERUNKER.js"></script>
+  </body>
+</html>

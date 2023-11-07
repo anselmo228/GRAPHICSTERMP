@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: black;
+  background-image: url("gachon.jpg");
+  background-size: cover;
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+canvas {
+  position: absolute;
+}
+
+.info-box {
+  background-color: #ffffff; /* 예시로 밝은 회색 배경을 가정 */
+  border-radius: 10px;
+  padding: 20px;
+  display: inline-block;
+  color: #4caf50; /* 검은색 텍스트 색상 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+  max-width: 300px; /* 최대 너비 지정 */
+  margin: 0 auto; /* 가운데 정렬 */
+  border: 2px solid #4caf50;
+}
+
+.hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+#progress-container {
+  width: 70%;
+  background-color: #ddd;
+  margin: 0 auto;
+  border-radius: 5px;
+  height: 20px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  background-color: #4caf50;
+  width: 0;
+  transition: width 0.3s ease-in-out;
+}
+/* 모달 스타일 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  overflow: auto;
+  font-family: "Nanum Gothic", sans-serif;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  font-family: "Nanum Gothic", sans-serif;
+  border-radius: 10px;
+  display: block; /* 모달 내부 요소들을 보이도록 설정 */
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  font-family: "Nanum Gothic", sans-serif;
+  background-color: #4caf50; /* 배경 색상 */
+  border: none;
+  color: white; /* 텍스트 색상 */
+  padding: 10px 20px; /* 여백 */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px; /* 위 여백 */
+  cursor: pointer;
+  border-radius: 5px; /* 모서리를 둥글게 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+}
+
+button:hover {
+  background-color: #45a049; /* 호버 효과 배경 색상 */
+}
