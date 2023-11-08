@@ -118,8 +118,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let character;
   let mixer;
 
-  let rotationSpeed = 0.02; // 회전 속도
-  let movementSpeed = 0.2; // 이동 속도
+  let rotationSpeed = 0.1; // 회전 속도
+  let movementSpeed = 0.5; // 이동 속도
 
   // 무당이 //
   loader.load("../model/mudang.gltf", (gltf) => {
