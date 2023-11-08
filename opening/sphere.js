@@ -55,11 +55,11 @@ function init() {
   
   // 3D 모델 로드
   const loader = new THREE.GLTFLoader();
-	loader.load('mudang.gltf', function(gltf){
-	  princess = gltf.scene.children[0];
-	  princess.scale.set(5, 5 ,5);
+	loader.load('../model/mudang.gltf', function(gltf){
+	  princess = gltf.scene;
+	  princess.scale.set(20, 20 ,20);
     princess.position.x = 0;
-    princess.position.y = 70;
+    princess.position.y = 100;
     princess.position.z = 150;
 
     mixer = new THREE.AnimationMixer(gltf.scene);
