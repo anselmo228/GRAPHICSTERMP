@@ -2,6 +2,7 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const tryAgainButton = document.getElementById('tryAgain');
 const progressBar = document.getElementById('progressFill');
+const heartsContainer = document.querySelector('.hearts-container');
 
 const arrowImages = {
   ArrowUp: new Image(),
@@ -19,10 +20,10 @@ let song = new Audio(currentTrack);
 const over = new Audio('./songs/gameover.mp3');
 const clear = new Audio('./songs/clear.mp3')
 const arrowKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
-const arrowSize = 50;
+const arrowSize = 70;
 let arrowSpeed = 3;
 const arrows = [];
-const maxLives = 7;
+const maxLives = 10;
 let score = 0;
 let lives = maxLives;
 let isGameOver = false;
@@ -33,6 +34,11 @@ arrowImages.ArrowUp.src = './asets/arrow_up.png';
 arrowImages.ArrowDown.src = './asets/arrow_down.png';
 arrowImages.ArrowLeft.src = './asets/arrow_left.png';
 arrowImages.ArrowRight.src = './asets/arrow_right.png';
+
+// 추가: 하트 이미지 설정
+const heartImage = new Image();
+heartImage.src = './asets/heart.png';
+const heartSize = 25; // 하트 이미지 크기
 
 function createArrow() {
   const direction = arrowKeys[Math.floor(Math.random() * 4)];
@@ -76,6 +82,7 @@ function switchTrack() {
     document.body.style.backgroundImage = 'url("./asets/vision.jpg")';
   }
 }
+
 function showPopup(level) {
   let color = 'black'; 
 
@@ -187,6 +194,8 @@ function onKeyDown(event) {
         showPopup('BAD');
         arrows.splice(i, 1);
         updateProgressBar();
+        // 추가: 하트 이미지 업데이트
+        updateHearts();
         break;
       }
     }
@@ -196,7 +205,7 @@ function onKeyDown(event) {
   }
 
   if (score === 100) {
-    gameClear(); 
+    gameClear();
   }
 
   switchTrack();
@@ -269,14 +278,15 @@ function gameOver() {
     arrowSpeed = 3;
     song = new Audio(currentTrack);
     document.body.style.backgroundImage = 'url("./asets/vision.jpg")';
+    initHearts(); // 추가: 하트 이미지 초기화
+    updateHearts(); // 추가: 하트 이미지 업데이트
     startGame();
   });
- 
+
   song.pause();
   song.currentTime = 0;
   over.play();
 }
-
 
 function gameLoop() {
   if (isGameOver) {
@@ -301,13 +311,15 @@ function gameLoop() {
     drawArrow(arrow);
   }
 
-  ctx.font = '24px Arial';
-  ctx.fillStyle = 'deep blue';
-  ctx.fillText('Score: ' + score, 20, 40);
+  ctx.font = '30px Nanum Gothic'; // 폰트 크기 두 배로 키우기
+  ctx.fillStyle = 'pink'; // 핑크색으로 변경
+  ctx.textAlign = 'right';
   updateProgressBar();
-  ctx.fillStyle = 'white';
-  ctx.fillText('Song: ' + theme, 20, 80);
-  ctx.fillText('Speed: ' + arrowSpeed, 20, 120);
+  ctx.fillStyle = 'black'; // 핑크색으로 변경
+  ctx.fillText(theme, 500, 200);
+  ctx.fillText('Speed: ' + arrowSpeed, 235, 300);
+  
+
 
   requestAnimationFrame(gameLoop);
 }
@@ -350,3 +362,32 @@ window.onload = function () {
   modal.style.display = "block";
   window.addEventListener("resize", onWindowResize, false);
 };
+
+// 추가: 하트 이미지 초기화 함수
+function initHearts() {
+  heartsContainer.innerHTML = '';
+  for (let i = 0; i < maxLives; i++) {
+    const heart = document.createElement('img');
+    heart.src = './asets/heart.png';
+    heart.width = heartSize*1.8;
+    heart.height = heartSize*1.8;
+    heartsContainer.appendChild(heart);
+  }
+}
+
+// 추가: 하트 이미지 업데이트 함수
+function updateHearts() {
+  const heartImages = heartsContainer.querySelectorAll('img');
+  for (let i = 0; i < maxLives; i++) {
+    if (i < lives) {
+      heartImages[i].style.display = 'block';
+    } else {
+      heartImages[i].style.display = 'none';
+    }
+  }
+}
+
+// 추가: 초기에 하트 이미지 생성
+initHearts();
+
+
