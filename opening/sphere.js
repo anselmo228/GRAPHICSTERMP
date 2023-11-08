@@ -57,7 +57,7 @@ function init() {
   const loader = new THREE.GLTFLoader();
 	loader.load('../model/mudang.gltf', function(gltf){
 	  princess = gltf.scene;
-	  princess.scale.set(20, 20 ,20);
+	  princess.scale.set(15, 15 ,15);
     princess.position.x = 0;
     princess.position.y = 100;
     princess.position.z = 150;
@@ -87,7 +87,7 @@ function onWindowResize() {
 
 function createMaterial(){
   // 디스코 텍스처 로드
-  var discoTexture = THREE.ImageUtils.loadTexture("disco.jpeg");
+  var discoTexture = THREE.ImageUtils.loadTexture("ground.png");
 
   // 디스코 재질 생성
   var discoMaterial = new THREE.MeshBasicMaterial({
