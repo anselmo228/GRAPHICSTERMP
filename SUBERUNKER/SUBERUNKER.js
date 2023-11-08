@@ -73,7 +73,7 @@ var player = {
 var level = 1;
 var totalLevels = 3; // level 수를 3으로 수정합니다.
 var score = 0;
-var speed = 800;
+var speed = 300;
 var maxScore = 500;
 var waitForRestart = true; // Add a flag to control waiting for restart
 
@@ -153,7 +153,6 @@ function gameLoop() {
   
         if (distance < player.radius + 10) {
           scene.remove(missileMeshes[i]);
-          //popMissile(missileMeshes[i]);
           missileMeshes.splice(i, 1);
           i--;
           score-=100;
@@ -176,7 +175,6 @@ function gameLoop() {
   
         if (distance < player.radius + 10) {
           scene.remove(scoreMeshes[i]);
-          //popMissile(missileMeshes[i]);
           scoreMeshes.splice(i, 1);
           i--;
           score+=100;
@@ -203,11 +201,11 @@ function restartScene() {
   myScore.innerHTML = "";
 
   if (level < totalLevels) {
-    speed /= 2;
+    speed /= 1.1;
     maxScore += 500;
     level += 1;
   } else {
-    speed = 800;
+    speed = 300;
     maxScore = 500;
     level = 1;
   }
