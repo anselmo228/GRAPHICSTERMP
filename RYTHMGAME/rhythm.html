@@ -26,19 +26,9 @@
       transform: translate(-50%, -50%);
     }
 
-    #progressBar {
-      width: 100%;
-      background-color: #ccc;
-    }
-
-    #progressFill {
-      height: 20px;
-      background-color: #4caf50;
-    }
-
     .hearts-container {
       position: absolute;
-      top: 30px;
+      top: 40px;
       left: 100px; /* 수정: 오른쪽 상단에 배치 */
       display: flex;
     }
@@ -125,13 +115,11 @@
 <img src="./asets/moodang.png" alt="Moodang Image" style="position: absolute; top: 0; left: 0; z-index: 1; width: 10%; height: auto;">
 <img src="./asets/music.png" alt="music Image" style="position: absolute; top: 17%; left: 1.4%; z-index: 1; width: 6%; height: auto;">
 <img src="./asets/speed.png" alt="speed Image" style="position: absolute; top: 30%; left: 1.8%; z-index: 1; width: 5%; height: auto;">
+<img src="./asets/button.png" alt="button Image" style="position: absolute; bottom: -3.5%; left:-15%; z-index: 1; width: 130%; height: 12%;">
 
 <canvas id="gameCanvas"></canvas>
 <p id="gameOver" style="display: none;">Game Over</p>
 <button id="tryAgain" style="display: none;">Try Again</button>
-<div id="progressBar">
-  <div id="progressFill"></div>
-</div>
 
 <div class="hearts-container"></div>
 

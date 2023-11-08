@@ -1,7 +1,6 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const tryAgainButton = document.getElementById('tryAgain');
-const progressBar = document.getElementById('progressFill');
 const heartsContainer = document.querySelector('.hearts-container');
 
 const arrowImages = {
@@ -55,10 +54,6 @@ function drawArrow(arrow) {
   ctx.drawImage(arrow.image, arrow.x, arrow.y, arrowSize, arrowSize);
 }
 
-function updateProgressBar() {
-  const progress = (lives / maxLives) * 100;
-  progressBar.style.width = progress + '%';
-}
 
 function switchTrack() {
   if (currentTrack === track1 && score >= 35) {
@@ -193,7 +188,7 @@ function onKeyDown(event) {
         lives -= 1;
         showPopup('BAD');
         arrows.splice(i, 1);
-        updateProgressBar();
+
         // 추가: 하트 이미지 업데이트
         updateHearts();
         break;
@@ -272,7 +267,7 @@ function gameOver() {
     score = 0;
     lives = maxLives;
     arrows.length = 0;
-    updateProgressBar();
+    
     tryAgainButton.style.display = 'none';
     currentTrack = track1;
     arrowSpeed = 3;
@@ -300,8 +295,8 @@ function gameLoop() {
   ctx.beginPath();
   ctx.moveTo(0, canvas.height);
   ctx.lineTo(canvas.width, canvas.height);
-  ctx.strokeStyle = 'white';
-  ctx.lineWidth = arrowSize;
+  ctx.strokeStyle = 'dark blue';
+  ctx.lineWidth = arrowSize*1.3;
   ctx.lineCap = 'round';
   ctx.stroke();
 
@@ -311,13 +306,13 @@ function gameLoop() {
     drawArrow(arrow);
   }
 
-  ctx.font = '30px Nanum Gothic'; // 폰트 크기 두 배로 키우기
+  ctx.font = '25px Arial Black'; // 폰트 크기 두 배로 키우기
   ctx.fillStyle = 'pink'; // 핑크색으로 변경
   ctx.textAlign = 'right';
-  updateProgressBar();
+
   ctx.fillStyle = 'black'; // 핑크색으로 변경
   ctx.fillText(theme, 500, 200);
-  ctx.fillText('Speed: ' + arrowSpeed, 235, 300);
+  ctx.fillText('Speed: ' + arrowSpeed, 250, 300);
   
 
 
