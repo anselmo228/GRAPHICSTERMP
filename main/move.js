@@ -9,12 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
     0.1,
     1000
   );
+  const directionalLight = new THREE.DirectionalLight("white", 0.25); // 1은 높은 강도를 나타냄
+
+  scene.add(directionalLight);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
 
   //바닥 이미지
   const textureLoader = new THREE.TextureLoader();
-  const floorTexture = textureLoader.load("../images/ground.png");
+  const floorTexture = textureLoader.load("../images/monun.jpg");
   const roadTexture = textureLoader.load("../images/road.png");
   const infin = new THREE.Vector3(50, 0, 0); // 무한대
   const cu = new THREE.Vector3(-50, 0, 0); // 큐브
@@ -43,34 +46,34 @@ document.addEventListener("DOMContentLoaded", function () {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById("scene-container").appendChild(renderer.domElement);
 
-  function createRoad(x, y, z, lotate) {
-    const roadMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(30, 15), // 크기 조절
-      new THREE.MeshStandardMaterial({
-        map: roadTexture,
-        transparent: true,
-        alphaTest: 0.5,
-      })
-    );
-    roadMesh.position.set(x, y, z);
+  // function createRoad(x, y, z, lotate) {
+  //   const roadMesh = new THREE.Mesh(
+  //     new THREE.PlaneGeometry(30, 15), // 크기 조절
+  //     new THREE.MeshStandardMaterial({
+  //       map: roadTexture,
+  //       transparent: true,
+  //       alphaTest: 0.5,
+  //     })
+  //   );
+  //   roadMesh.position.set(x, y, z);
 
-    if (lotate === 1) {
-      roadMesh.rotation.z = -Math.PI / 2;
-    }
+  //   if (lotate === 1) {
+  //     roadMesh.rotation.z = -Math.PI / 2;
+  //   }
 
-    roadMesh.rotation.x = -Math.PI / 2;
+  //   roadMesh.rotation.x = -Math.PI / 2;
 
-    scene.add(roadMesh);
-  }
-  createRoad(-30, -3.4, 0);
-  createRoad(0, -3.4, 0);
-  createRoad(30, -3.4, 0);
-  // 이어붙여놨음
+  //   scene.add(roadMesh);
+  // }
+  // createRoad(-30, -3.4, 0);
+  // createRoad(0, -3.4, 0);
+  // createRoad(30, -3.4, 0);
+  // // 이어붙여놨음
 
-  createRoad(-4, -3.4, 15, 1);
-  createRoad(-4, -3.4, 45, 1);
-  createRoad(-4, -3.4, -15, 1);
-  createRoad(-4, -3.4, -45, 1);
+  // createRoad(-4, -3.4, 15, 1);
+  // createRoad(-4, -3.4, 45, 1);
+  // createRoad(-4, -3.4, -15, 1);
+  // createRoad(-4, -3.4, -45, 1);
 
   const loader = new THREE.GLTFLoader();
   let character;
@@ -84,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     character = gltf.scene;
     scene.add(character);
 
-    character.position.set(0, 0, -70);
+    character.position.set(0, 0, -60);
     character.castShadow = true;
     character.receiveShadow = true;
 
@@ -134,63 +137,63 @@ document.addEventListener("DOMContentLoaded", function () {
   //   animate();
   // });
 
-  // 깃발
-  loader.load("../model/flag/scene.gltf", (gltf) => {
-    const flag = gltf.scene;
-    scene.add(flag);
+  // // 깃발
+  // loader.load("../model/flag/scene.gltf", (gltf) => {
+  //   const flag = gltf.scene;
+  //   scene.add(flag);
 
-    flag.position.set(-5, 0, -65);
+  //   flag.position.set(-5, 0, -65);
 
-    flag.scale.set(2, 2, 2);
+  //   flag.scale.set(2, 2, 2);
 
-    flag.castShadow = true;
-    flag.receiveShadow = true;
+  //   flag.castShadow = true;
+  //   flag.receiveShadow = true;
 
-    animate();
-  });
+  //   animate();
+  // });
 
-  // 큐브 ( AI 공학관 ) //
-  loader.load("../model/cube/scene.gltf", (gltf) => {
-    const cube = gltf.scene;
-    scene.add(cube);
+  // // 큐브 ( AI 공학관 ) //
+  // loader.load("../model/cube/scene.gltf", (gltf) => {
+  //   const cube = gltf.scene;
+  //   scene.add(cube);
 
-    cube.position.set(-50, 0, 0);
-    cube.scale.set(2, 2, 2);
+  //   cube.position.set(-50, 0, 0);
+  //   cube.scale.set(2, 2, 2);
 
-    cube.castShadow = true;
-    cube.receiveShadow = true;
+  //   cube.castShadow = true;
+  //   cube.receiveShadow = true;
 
-    animate();
-  });
+  //   animate();
+  // });
 
-  // 바람개비 ( 바람개비 동산 )
-  loader.load("../model/pinwheel/scene.gltf", (gltf) => {
-    const pinwheel = gltf.scene;
-    scene.add(pinwheel);
+  // // 바람개비 ( 바람개비 동산 )
+  // loader.load("../model/pinwheel/scene.gltf", (gltf) => {
+  //   const pinwheel = gltf.scene;
+  //   scene.add(pinwheel);
 
-    pinwheel.position.set(0, 50, 0);
-    pinwheel.scale.set(100, 100, 100);
+  //   pinwheel.position.set(0, 50, 0);
+  //   pinwheel.scale.set(100, 100, 100);
 
-    pinwheel.castShadow = true;
-    pinwheel.receiveShadow = true;
+  //   pinwheel.castShadow = true;
+  //   pinwheel.receiveShadow = true;
 
-    animate();
-  });
+  //   animate();
+  // });
 
-  // 무한대 ( 가천관 )
-  loader.load("../model/infinity_loop/scene.gltf", (gltf) => {
-    const infinity_loop = gltf.scene;
-    scene.add(infinity_loop);
+  // // 무한대 ( 가천관 )
+  // loader.load("../model/infinity_loop/scene.gltf", (gltf) => {
+  //   const infinity_loop = gltf.scene;
+  //   scene.add(infinity_loop);
 
-    infinity_loop.position.set(50, 0, 0);
-    infinity_loop.scale.set(0.01, 0.01, 0.01);
-    infinity_loop.castShadow = true;
-    infinity_loop.receiveShadow = true;
+  //   infinity_loop.position.set(50, 0, 0);
+  //   infinity_loop.scale.set(0.01, 0.01, 0.01);
+  //   infinity_loop.castShadow = true;
+  //   infinity_loop.receiveShadow = true;
 
-    infinity_loop.rotation.z = Math.PI / 2;
+  //   infinity_loop.rotation.z = Math.PI / 2;
 
-    animate();
-  });
+  //   animate();
+  // });
 
   let rotationAngle = 0; // 현재 회전 각도
 
@@ -257,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 카메라 위치 업데이트
     const cameraDistance = 10; // 카메라와 캐릭터 사이의 거리
-    const cameraHeight = 8; // 카메라의 높이
+    const cameraHeight = 15; // 카메라의 높이
 
     const characterDirection = new THREE.Vector3(
       -Math.sin(rotationAngle),
@@ -279,15 +282,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (character) {
       const distance = character.position.distanceTo(infin);
-      const distance1 = character.position.distanceTo(cu)
+      const distance1 = character.position.distanceTo(cu);
       if (distance < proximityThreshold) {
         // The character is within the proximity threshold of the target location, trigger the new HTML page here.
-        window.location.href = '../loading/loading.html'; // Replace 'loading.html' with the desired URL.
+        window.location.href = "../loading/loading.html"; // Replace 'loading.html' with the desired URL.
         return; // Stop further animation if you want to switch pages immediately.
       }
       if (distance1 < proximityThreshold) {
         // The character is within the proximity threshold of the target location, trigger the new HTML page here.
-        window.location.href = '../RYTHMGAME/loading/loading.html'; // Replace 'loading.html' with the desired URL.
+        window.location.href = "../RYTHMGAME/loading/loading.html"; // Replace 'loading.html' with the desired URL.
         return; // Stop further animation if you want to switch pages immediately.
       }
     }
