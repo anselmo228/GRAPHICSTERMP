@@ -51,13 +51,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const start_wordTexture2 = textureLoader.load("../images/start_word2.png");
   const start_wordTexture3 = textureLoader.load("../images/start_word3.png");
   const start_wordTexture4 = textureLoader.load("../images/start_word4.png");
-  const treeTexture = textureLoader.load("../images/tree.png");
   const playGroundTexture = textureLoader.load("../images/playground.png");
-  const road2Texture = textureLoader.load("../images/road2.png");
-  const roadLotateTexture = textureLoader.load("../images/road_lotate.png");
   const moodangTexture = textureLoader.load("../images/moodang.png");
   const somangTexture = textureLoader.load("../images/somang.png");
   const busTexture = textureLoader.load("../images/bus.png");
+  const bigRoadTexture = textureLoader.load("../images/big_road.png");
 
   function createImage(x, y, z, texture, size_x, size_y, rotation) {
     const imageMesh = new THREE.Mesh(
@@ -80,23 +78,38 @@ document.addEventListener("DOMContentLoaded", function () {
     scene.add(imageMesh);
   }
 
-  createImage(12, -3.3, -40, exersiceTexture, 10, 10);
+  // 과제면제권
+  createImage(15, -3.3, -50, exersiceTexture, 10, 10);
+
+  // 시작점 문장 4개
   createImage(0, -3.3, -50, start_wordTexture, 10, 5);
   createImage(0, -3.3, -53, start_wordTexture2, 14, 5);
   createImage(0, -3.3, -57, start_wordTexture3, 14, 5);
   createImage(0, -3.3, -60, start_wordTexture4, 16, 5);
-  // createImage(10, -3.3, -50, treeTexture, 4, 4);
-  createImage(-20, -3.3, -40, playGroundTexture, 20, 20);
-  createImage(-1, -3.3, -44.3, road2Texture, 10, 10);
-  createImage(-1, -3.31, -37.8, road2Texture, 10, 10);
-  createImage(-1, -3.31, -31.2, road2Texture, 10, 10);
-  createImage(-7.6, -3.31, -21.7, road2Texture, 10, 10, 1);
-  createImage(-14.3, -3.31, -21.7, road2Texture, 10, 10, 1);
-  createImage(-21, -3.31, -21.7, road2Texture, 10, 10, 1);
-  createImage(-1, -3.31, -23.5, roadLotateTexture, 10, 10);
-  createImage(5, -3.31, -23.5, moodangTexture, 13, 10);
-  createImage(-12, -3.31, -25.5, somangTexture, 13, 10);
-  createImage(-7, -3.31, -35.5, busTexture, 13, 10);
+
+  // 운동장
+  createImage(-20, -3.3, -50, playGroundTexture, 20, 20);
+
+  // 길
+  // createImage(-1, -3.3, -44.3, road2Texture, 10, 10);
+  // createImage(-1, -3.31, -37.8, road2Texture, 10, 10);
+  // createImage(-1, -3.31, -31.2, road2Texture, 10, 10);
+  // createImage(-7.6, -3.31, -21.7, road2Texture, 10, 10, 1);
+  // createImage(-14.3, -3.31, -21.7, road2Texture, 10, 10, 1);
+  // createImage(-21, -3.31, -21.7, road2Texture, 10, 10, 1);
+  // createImage(-1, -3.31, -23.5, roadLotateTexture, 10, 10);
+
+  // 무당이
+  createImage(5, -3.31, -26.5, moodangTexture, 13, 10);
+
+  // 소망 로고
+  createImage(-12, -3.31, -27.5, somangTexture, 13, 10);
+
+  // 셔틀버스
+  createImage(12, -3.31, -35.5, busTexture, 13, 10);
+
+  // 큰길
+  createImage(-12, -3.31, -25.5, bigRoadTexture, 40, 60);
 
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById("scene-container").appendChild(renderer.domElement);
@@ -113,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
     character = gltf.scene;
     scene.add(character);
 
-    character.position.set(-1, -3.4, -23.5);
+    character.position.set(0, -3.3, -63);
     character.castShadow = true;
     character.receiveShadow = true;
 
@@ -170,13 +183,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const infinity_loop = gltf.scene;
     scene.add(infinity_loop);
 
-    infinity_loop.position.set(-25, 0, -21);
+    infinity_loop.position.set(-30, 0, -36);
     infinity_loop.scale.set(0.01, 0.01, 0.01);
     infinity_loop.castShadow = true;
     infinity_loop.receiveShadow = true;
 
     infinity_loop.rotation.y = -Math.PI / 2;
     infinity_loop.rotation.z = -Math.PI / 2;
+
+    animate();
+  });
+
+  // 큐브 ( AI 공학관 ) //
+  loader.load("../model/cube/scene.gltf", (gltf) => {
+    const cube = gltf.scene;
+    scene.add(cube);
+
+    cube.position.set(-31, -2, -15);
+    cube.scale.set(1, 1, 1);
+
+    cube.castShadow = true;
+    cube.receiveShadow = true;
 
     animate();
   });
@@ -227,8 +254,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const delta = clock.getDelta();
 
     // 카메라 위치 업데이트
-    const cameraDistance = 5; // 카메라와 캐릭터 사이의 거리
-    const cameraHeight = 13; // 카메라의 높이
+    const cameraDistance = 6; // 카메라와 캐릭터 사이의 거리
+    const cameraHeight = 15; // 카메라의 높이
 
     const characterDirection = new THREE.Vector3(
       -Math.sin(rotationAngle),
