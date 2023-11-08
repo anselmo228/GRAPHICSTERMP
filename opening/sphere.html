@@ -20,14 +20,29 @@
 <script type="text/javascript" src="GLTFLoader.js"></script>
 <!-- <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
 <script  src="./sphere.js"></script>
+
+<style>
+  body {
+    margin: 0;
+    overflow: hidden; /* Prevent scrollbars */
+    position: relative; /* Position for the title image */
+  }
+
+  #title {
+    position: absolute; /* Position the title image absolutely */
+    top: 5;
+    left: 30%;
+    width: 40%; /* Set the width to 100% to fill the entire screen width */
+    height: auto; /* Automatically adjust the height to maintain the image's aspect ratio */
+    z-index: 1;
+  }
+</style>
 </head>
 
 <body>
-
+  <img id="title" src="title.png" alt="Title Image">
   <div id="canvas">
   <div class="keys">
-    <h1>Gachon</h1><br><br>
-    <h1>Mini Game World</h1>
   </div>
 </body>
 </html>
