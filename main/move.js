@@ -14,14 +14,15 @@ document.addEventListener("DOMContentLoaded", function () {
   scene.add(directionalLight);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
+  
 
   //바닥 이미지
   const textureLoader = new THREE.TextureLoader();
   const floorTexture = textureLoader.load("../images/monun.jpg");
   const roadTexture = textureLoader.load("../images/road.png");
 
-  const infin = new THREE.Vector3(50, 0, 0); // 무한대
-  const cu = new THREE.Vector3(-50, 0, 0); // 큐브
+  const infin = new THREE.Vector3(-30, 0, -36); // 무한대
+  const cu = new THREE.Vector3(-31, -2, -15); // 큐브
   const proximityThreshold = 5.0; // Set the proximity threshold within which the action will be triggered
 
   floorTexture.wrapS = THREE.RepeatWrapping;
