@@ -209,6 +209,22 @@ document.addEventListener("DOMContentLoaded", function () {
     animate();
   });
 
+   // 비전타워 //
+   loader.load("../model/vision/scene.gltf", (gltf) => {
+    const vision = gltf.scene;
+    scene.add(vision);
+
+    vision.position.set(-2, -4, -2);
+    vision.scale.set(0.6, 0.6, 0.6);
+
+    vision.castShadow = true;
+    vision.receiveShadow = true;
+    vision.rotation.set(0, 1.6, 0);
+
+    animate();
+  });
+
+
   let rotationAngle = 0; // 현재 회전 각도
 
   // 무당이 조작 //
