@@ -92,7 +92,7 @@ function onWindowResize() {
 
 function createMaterial(){
   // 디스코 텍스처 로드
-  var discoTexture = THREE.ImageUtils.loadTexture("ground.png");
+  var discoTexture = THREE.ImageUtils.loadTexture("asets/ground.png");
 
   // 디스코 재질 생성
   var discoMaterial = new THREE.MeshBasicMaterial({
