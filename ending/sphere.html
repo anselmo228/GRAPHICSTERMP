@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./sphere.css">
+  <script type="text/javascript" src="three.js"></script>
+  <script type="text/javascript" src="three.min.js"></script>
+  <script type="text/javascript" src="GLTFLoader.js"></script>
+  <script src="./sphere.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* Prevent scrollbars */
+      position: relative; /* Position for the title image */
+    }
+
+    #goodbye {
+      position: absolute; /* Position the title image absolutely */
+      top: 13%;
+      left: 30%;
+      width: 40%; /* Set the width to 100% to fill the entire screen width */
+      height: auto; /* Automatically adjust the height to maintain the image's aspect ratio */
+      z-index: 1;
+    }    
+    /* Set the size for the START image */
+    #restart {
+      position: absolute;
+      cursor: pointer;
+      z-index:10;
+      top: 90%; /* Adjust the top position */
+      left: 680px; /* Adjust the left position for START image */
+      width: 200px; /* Set the width as per your preference */
+      height: auto; /* Automatically adjust the height */
+    }
+  </style>
+</head>
+<body>
+  <img id="goodbye" src="goodbye.png" alt="Goodbye Image">
+  <div id="canvas">
+    <a href="../main/main.html"><img id="restart" src="restart.png"></a>
+  </div>
+</body>
+</html>
