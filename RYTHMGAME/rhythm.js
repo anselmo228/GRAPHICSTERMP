@@ -11,11 +11,10 @@ const arrowImages = {
 };
 
 let theme = 'MISSION IMPOSSIBLE OST';
+let song;
 const track1 = './songs/missionimpossible.mp3';
 const track2 = './songs/Pirates of the Caribbean.mp3';
 const track3 = './songs/stranger-things-124008.mp3';
-let currentTrack = track1;
-let song = new Audio(currentTrack);
 const over = new Audio('./songs/gameover.mp3');
 const clear = new Audio('./songs/clear.mp3')
 const arrowKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
@@ -26,6 +25,7 @@ const maxLives = 10;
 let score = 0;
 let lives = maxLives;
 let isGameOver = false;
+
 
 showPopup1('LEVEL1');
 
@@ -56,25 +56,14 @@ function drawArrow(arrow) {
 
 
 function switchTrack() {
-  if (currentTrack === track1 && score >= 35) {
+  if (score >= 35) {
     showPopup1('LEVEL2');
-    currentTrack = track3;
     arrowSpeed = 5;
-    song.pause();
-    song = new Audio(currentTrack);
-    song.play();
-    theme = 'STRANGER THING OST OST';
-    document.body.style.backgroundImage = 'url("./asets/vision.jpg")';
+
   }
-  if (currentTrack === track3 && score >= 65) {
+  if (score >= 65) {
     showPopup1('LEVEL3');
-    currentTrack = track2;
     arrowSpeed = 7;
-    song.pause();
-    song = new Audio(currentTrack);
-    song.play();
-    theme = 'PIRATES OF THE CARIBBEAN OST';
-    document.body.style.backgroundImage = 'url("./asets/vision.jpg")';
   }
 }
 
@@ -173,7 +162,7 @@ function onKeyDown(event) {
   for (let i = 0; i < arrows.length; i++) {
     if (key === arrows[i].key) {
       if (arrows[i].y >= canvas.height - arrowSize && arrows[i].y <= canvas.height - 2) {
-        score += 1;
+        score += 5;
         showPopup('GOOD');
         arrows.splice(i, 1);
         isHit = true;
@@ -196,6 +185,7 @@ function onKeyDown(event) {
     }
     if (lives === 0) {
       gameOver();
+      
     }
   }
 
@@ -236,7 +226,7 @@ function gameClear() {
 
 function gameOver() {
   isGameOver = true;
-
+  
   // 모달 요소 가져오기
   const modal = document.getElementById("modal");
   const modalContent = document.querySelector(".modal-content");
@@ -319,14 +309,25 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
-function startGame() {
+function startGame(currentTrack) {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  song = new Audio(currentTrack);
 
+  if(currentTrack == track1){
+    theme = 'MISSION IMPOSSIBLE OST  ';
+  } 
+  if(currentTrack == track2){
+    theme = 'Pirates of Caribbean OST     '
+  }
+  if(currentTrack == track3){
+    theme = 'Stranger Things Main OST   ';
+  }
   window.addEventListener('keydown', onKeyDown);
   over.pause();
   over.currentTime = 0;
   song.play();
+
   setInterval(createArrow, 1000);
   gameLoop();
 }
@@ -338,7 +339,7 @@ var closeBtn = document.getElementsByClassName("close")[0];
 
 startBtn.onclick = function () {
   modal.style.display = "none"; // 시작 버튼을 누르면 모달이 사라집니다.
-  startGame();
+  songModal.style.display = "block";
 };
 
 closeBtn.onclick = function () {
@@ -356,6 +357,30 @@ window.onclick = function (event) {
 window.onload = function () {
   modal.style.display = "block";
   window.addEventListener("resize", onWindowResize, false);
+};
+
+var songModal = document.getElementById('songModal');
+var closeSongModal = document.getElementById('closeSongModal');
+var songButton1 = document.getElementById("songButton1");
+var songButton2 = document.getElementById("songButton2");
+var songButton3 = document.getElementById("songButton3");
+
+songButton1.onclick = function () {
+  songModal.style.display = "none"; 
+  let currentTrack = songButton1.getAttribute('data-song');
+  startGame(currentTrack);
+};
+
+songButton2.onclick = function () {
+  songModal.style.display = "none"; 
+  let currentTrack = songButton2.getAttribute('data-song');
+  startGame(currentTrack);
+};
+
+songButton3.onclick = function () {
+  songModal.style.display = "none"; 
+  let currentTrack = songButton3.getAttribute('data-song');
+  startGame(currentTrack);
 };
 
 // 추가: 하트 이미지 초기화 함수
@@ -384,5 +409,6 @@ function updateHearts() {
 
 // 추가: 초기에 하트 이미지 생성
 initHearts();
+
 
 
