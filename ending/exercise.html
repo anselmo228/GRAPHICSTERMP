@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script type="text/javascript" src="js/three.js"></script>
+  <script type="text/javascript" src="js/three.min.js"></script>
+  <script type="text/javascript" src="js/GLTFLoader.js"></script>
+  <script src="./exercise.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* Prevent scrollbars */
+      position: relative; /* Position for the title image */
+      background-image: url("asets/sky_exercise.png");
+      width: 100%;
+      height: 100vh;
+      text-align: center;
+      background-size: cover;
+    }
+    #exercise {
+      position: absolute;
+      top: 5%; /* Adjust the top position */
+      left: 50px; /* Adjust the left position for START image */
+      width: 900px; /* Set the width as per your preference */
+      height: auto; /* Automatically adjust the height */
+    }
+
+    #congratulations {
+      position: absolute;
+      top: 10%; /* Adjust the top position */
+      right: 50px; /* Adjust the left position for START image */
+      width: 700px; /* Set the width as per your preference */
+      height: auto; /* Automatically adjust the height */
+    }
+
+    #star {
+      position: absolute;
+      top: 35%; /* Adjust the top position */
+      right: 90px; /* Adjust the left position for START image */
+      width: 600px; /* Set the width as per your preference */
+      height: auto; /* Automatically adjust the height */
+    }
+
+    #star2 {
+      position: absolute;
+      top: 35%; /* Adjust the top position */
+      right: 30px; /* Adjust the left position for START image */
+      width: 600px; /* Set the width as per your preference */
+      height: auto; /* Automatically adjust the height */
+    }
+
+    /* Set the size for the START image */
+    #arrow {
+      top: 40%; /* Adjust the top position */
+      right: 10px; /* Adjust the left position for START image */
+      width: 50px; /* Set the width as per your preference */
+      height: auto; /* Automatically adjust the height */
+      position: absolute;
+      cursor: pointer;
+      z-index:10;
+    }
+  </style>
+</head>
+<body>
+  <div id="canvas">
+    <img id="exercise" src="asets/exercise.png" alt="Exercise Image">
+    <img id="congratulations" src="asets/congratulations.png" alt="congratulations Image">
+    <div id="starContainer">
+        <img id="star" src="asets/star.png" alt="Star Image">
+        <img id="star2" src="asets/star2.png" alt="Star2 Image">
+      </div>
+    <a href="sphere.html"><img id="arrow" src="asets/arrow.png"></a>
+  </div>
+</body>
+</html>
