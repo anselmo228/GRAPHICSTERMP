@@ -301,8 +301,8 @@ function gameLoop() {
   ctx.textAlign = 'right';
 
   ctx.fillStyle = 'black'; // 핑크색으로 변경
-  ctx.fillText(theme, 500, 200);
-  ctx.fillText('Speed: ' + arrowSpeed, 250, 300);
+  ctx.fillText(theme, 500, 150);
+  ctx.fillText('Speed: ' + arrowSpeed, 250, 250);
   
 
 
