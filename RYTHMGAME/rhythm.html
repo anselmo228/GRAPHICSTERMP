@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Rhythm Game</title>
   <style>
@@ -29,11 +29,10 @@
     .hearts-container {
       position: absolute;
       top: 40px;
-      left: 100px; /* 수정: 오른쪽 상단에 배치 */
+      left: 100px;
       display: flex;
     }
 
-    /* 모달 스타일 */
     .modal {
       display: none;
       position: fixed;
@@ -52,7 +51,6 @@
       font-family: "Nanum Gothic", sans-serif;
       border-radius: 10px;
       display: block;
-      /* 모달 내부 요소들을 보이도록 설정 */
       background-color: #fefefe;
       margin: 15% auto;
       padding: 20px;
@@ -77,28 +75,21 @@
     button {
       font-family: "Nanum Gothic", sans-serif;
       background-color: #4caf50;
-      /* 배경 색상 */
       border: none;
       color: white;
-      /* 텍스트 색상 */
       padding: 10px 20px;
-      /* 여백 */
       text-align: center;
       text-decoration: none;
       display: inline-block;
       font-size: 16px;
       margin-top: 20px;
-      /* 위 여백 */
       cursor: pointer;
       border-radius: 5px;
-      /* 모서리를 둥글게 */
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      /* 그림자 효과 */
     }
 
     button:hover {
       background-color: #45a049;
-      /* 호버 효과 배경 색상 */
     }
   </style>
 </head>
@@ -122,6 +113,18 @@
 <button id="tryAgain" style="display: none;">Try Again</button>
 
 <div class="hearts-container"></div>
+
+<!-- 추가: 노래 선택 모달 -->
+<div id="songModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeSongModal">&times;</span>
+    <h2>Select a Song</h2>
+    <p>Choose a song for your game:</p>
+    <button id="songButton1" data-song="./songs/missionimpossible.mp3">Mission Impossible OST</button>
+    <button id="songButton2" data-song="./songs/stranger-things-124008.mp3">Stranger Things OST</button>
+    <button id="songButton3" data-song="./songs/Pirates of the Caribbean.mp3">Pirates of the Caribbean OST</button>
+  </div>
+</div>
 
 <script src="rhythm.js"></script>
 </body>

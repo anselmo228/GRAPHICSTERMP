@@ -56,11 +56,11 @@ function init() {
   // 3D 모델 로드
   const loader = new THREE.GLTFLoader();
 	loader.load('../model/mudang.gltf', function(gltf){
-	  princess = gltf.scene;
-	  princess.scale.set(15, 15 ,15);
-    princess.position.x = 0;
-    princess.position.y = 100;
-    princess.position.z = 150;
+	  mudang = gltf.scene;
+	  mudang.scale.set(15, 15 ,15);
+    mudang.position.x = 0;
+    mudang.position.y = 100;
+    mudang.position.z = 150;
 
     mixer = new THREE.AnimationMixer(gltf.scene);
 
@@ -162,4 +162,9 @@ function animateStars() {
     // if the particle is too close move it to the back
     if(star.position.x<-400) star.position.x+=800; 
   }
+}
+
+function openImg() {
+  var source = "../main/main.html";
+  window.open(source);
 }

@@ -1,67 +1,12 @@
-var comments = ["EASY", "MEDIUM", "HARD"]; // level 코멘트 배열에서 항목을 줄입니다.
+var comments = ["EASY", "MEDIUM", "HARD"];
 var myLevel = document.getElementById("level");
 var myScore = document.getElementById("score");
 var progressBar = document.getElementById("progress-bar");
 
-// Initialize Three.js scene, camera, and renderer
-var scene = new THREE.Scene();
+var scene, camera, renderer, playerMesh, missileMeshes, scoreMeshes;
+var playerGeometry, playerMaterial, missileGeometry, missileMaterial, scoreGeometry, scoreMaterial;
+var directionalLight, ambientLight;
 
-// Calculate the desired size of the camera's view
-var desiredWidth = 600; // Adjust this as needed
-var aspectRatio = window.innerWidth / window.innerHeight;
-var desiredHeight = desiredWidth / aspectRatio;
-
-
-var camera = new THREE.OrthographicCamera(
-  -desiredWidth / 2,
-  desiredWidth / 2,
-  desiredHeight / 2,
-  -desiredHeight / 2,
-  0.1,
-  1000
-);
-
-var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById("webgl-container").appendChild(renderer.domElement);
-
-// Define player and missile geometries and materials
-var playerGeometry = new THREE.SphereGeometry(10, 32, 32);
-var playerMaterial = new THREE.MeshPhongMaterial({
-  color: 0x0727CA,
-  specular: 0xffffff, // Specular highlight color
-});
-var playerMesh = new THREE.Mesh(playerGeometry, playerMaterial);
-playerMesh.position.set(0, 0, 300); // Adjust player's initial position
-scene.add(playerMesh);
-
-var missileGeometry = new THREE.SphereGeometry(5, 32, 32);
-var missileMaterial = new THREE.MeshPhongMaterial({
-  color: 0x07A852,
-  specular: 0xffffff, // Specular highlight color
-});
-
-// Create an array to hold missile meshes
-var missileMeshes = [];
-
-var scoreGeometry = new THREE.SphereGeometry(5, 32, 32);
-var scoreMaterial = new THREE.MeshPhongMaterial({
-  color: 0xFFD500,
-  specular: 0xffffff, // Specular highlight color
-});
-
-// Create an array to hold missile meshes
-var scoreMeshes = [];
-
-
-var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-directionalLight.position.set(0, 499, 0);
-scene.add(directionalLight);
-
-var ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-scene.add(ambientLight);
-
-// Game state variables
 var gameOver = false;
 var score = 0;
 var time = 0;
@@ -71,11 +16,75 @@ var player = {
   radius: 20
 };
 var level = 1;
-var totalLevels = 3; // level 수를 3으로 수정합니다.
-var score = 0;
-var speed = 800;
+var totalLevels = 3;
+var speed = 300;
 var maxScore = 500;
-var waitForRestart = true; // Add a flag to control waiting for restart
+var waitForRestart = true;
+
+function init() {
+  scene = new THREE.Scene();
+
+  var desiredWidth = 600;
+  var aspectRatio = window.innerWidth / window.innerHeight;
+  var desiredHeight = desiredWidth / aspectRatio;
+
+  camera = new THREE.OrthographicCamera(
+    -desiredWidth / 2,
+    desiredWidth / 2,
+    desiredHeight / 2,
+    -desiredHeight / 2,
+    0.1,
+    1000
+  );
+
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById("webgl-container").appendChild(renderer.domElement);
+
+  // const loader = new THREE.GLTFLoader();
+	// loader.load('../model/mudang.gltf', function(gltf){
+	//   mudang = gltf.scene;
+	//   mudang.scale.set(15, 15 ,15);
+    
+	//   scene.add(gltf.scene);
+
+  //   animate();
+
+	// }, undefined, function (error) {
+	// 	console.error(error);
+	// });
+
+  playerGeometry = new THREE.SphereGeometry(10, 32, 32);
+  playerMaterial = new THREE.MeshPhongMaterial({
+    color: 0x0727CA,
+    specular: 0xffffff,
+  });
+  playerMesh = new THREE.Mesh(playerGeometry, playerMaterial);
+  playerMesh.position.set(0, 0, 300);
+  scene.add(playerMesh);
+
+  missileGeometry = new THREE.SphereGeometry(5, 32, 32);
+  missileMaterial = new THREE.MeshPhongMaterial({
+    color: 0x07A852,
+    specular: 0xffffff,
+  });
+
+  missileMeshes = [];
+  scoreGeometry = new THREE.SphereGeometry(5, 32, 32);
+  scoreMaterial = new THREE.MeshPhongMaterial({
+    color: 0xFFD500,
+    specular: 0xffffff,
+  });
+
+  scoreMeshes = [];
+
+  directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+  directionalLight.position.set(0, 499, 0);
+  scene.add(directionalLight);
+
+  ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+  scene.add(ambientLight);
+}
 
 document.addEventListener('mousemove', function (event) {
   if (!gameOver) {
@@ -153,7 +162,6 @@ function gameLoop() {
   
         if (distance < player.radius + 10) {
           scene.remove(missileMeshes[i]);
-          //popMissile(missileMeshes[i]);
           missileMeshes.splice(i, 1);
           i--;
           score-=100;
@@ -176,7 +184,6 @@ function gameLoop() {
   
         if (distance < player.radius + 10) {
           scene.remove(scoreMeshes[i]);
-          //popMissile(missileMeshes[i]);
           scoreMeshes.splice(i, 1);
           i--;
           score+=100;
@@ -203,11 +210,11 @@ function restartScene() {
   myScore.innerHTML = "";
 
   if (level < totalLevels) {
-    speed /= 2;
+    speed /= 1.1;
     maxScore += 500;
     level += 1;
   } else {
-    speed = 800;
+    speed = 300;
     maxScore = 500;
     level = 1;
   }
@@ -269,6 +276,7 @@ function restartGame() {
 }
 
 window.onload = function () {
+  init()
   modal1.style.display = "block";
   myLevel.innerText = comments[level - 1];
 
