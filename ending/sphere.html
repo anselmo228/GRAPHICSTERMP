@@ -37,7 +37,26 @@
 <body>
   <img id="goodbye" src="asets/goodbye.png" alt="Goodbye Image">
   <div id="canvas">
-    <a href="../opening/sphere.html"><img id="restart" src="asets/restart.png"></a>
+    <a href="javascript:void(0);" onclick="restartGame()"><img id="restart" src="asets/restart.png"></a>     
   </div>
+
+  <audio id="endingAudio" autoplay loop><source src="../sound/ending.mp3" type="audio/mp3"></audio>
+  <audio id="gameStartAudio" src="../sound/game_start.mp3"></audio>
+
+  <script>
+    var endingAudio = document.getElementById("endingAudio");
+    var gameStartAudio = document.getElementById("gameStartAudio");
+  
+    function restartGame() {
+      endingAudio.pause();
+      endingAudio.currentTime = 0;
+      gameStartAudio.play();
+
+      setTimeout(function() {
+        window.location.href = "../opening/sphere.html";
+      }, 500);
+    }
+  </script>
+
 </body>
 </html>

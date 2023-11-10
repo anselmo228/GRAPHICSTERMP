@@ -163,8 +163,3 @@ function animateStars() {
     if(star.position.x<-400) star.position.x+=800; 
   }
 }
-
-function openImg() {
-  var source = "../main/main.html";
-  window.open(source);
-}

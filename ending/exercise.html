@@ -69,7 +69,22 @@
         <img id="star" src="asets/star.png" alt="Star Image">
         <img id="star2" src="asets/star2.png" alt="Star2 Image">
       </div>
-    <a href="sphere.html"><img id="arrow" src="asets/arrow.png"></a>
+    <a href="javascript:void(0);" onclick="nextPage()"><img id="arrow" src="asets/arrow.png"></a>    
   </div>
+
+  <audio id="exerciseAudio" autoplay><source src="../sound/exercise.mp3" type="audio/mp3"></audio>
+  <audio id="nextAudio" src="../sound/game_start.mp3"></audio>
+
+  <script>
+    var exerciseAudio = document.getElementById("exerciseAudio");
+    var nextAudio = document.getElementById("nextAudio");
+  
+    function nextPage() {
+      nextAudio.play();
+      setTimeout(function() {
+        window.location.href = "sphere.html";
+      }, 500);
+    }
+  </script>
 </body>
 </html>
