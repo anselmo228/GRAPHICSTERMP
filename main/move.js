@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       if (distance3 < 10) {
         // The character is within the proximity threshold of the target location, trigger the new HTML page here.
-        window.location.href = "../ending/sphere.html"; // Replace 'loading.html' with the desired URL.
+        window.location.href = "../ending/exercise.html"; // Replace 'loading.html' with the desired URL.
         return; // Stop further animation if you want to switch pages immediately.
       }
     }
