@@ -3,6 +3,50 @@
   <head>
     <meta charset="utf-8" />
     <title>Three.js Character Movement</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+  
+      #scene-container {
+        position: fixed;
+      }
+
+      #quest-container {
+        position: fixed;
+        top: 10px;
+        left: 5%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 20px;
+      }
+
+      #quest {
+        width: 100px;
+        height: auto;
+        margin-right: 10px;
+      }
+
+      #canvas {
+        position: fixed;
+        top: 50px;
+        left: 5%;
+        transform: translateX(-50%);
+        background-color: #edbbd4;
+        padding: 10px;
+        border-radius: 20px;
+      }
+  
+      img {
+        width: 100px; /* 이미지 크기 조절 */
+        height: auto;
+        margin: 0 10px;
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <div id="scene-container"></div>
@@ -11,5 +55,14 @@
     <script src="js/GLTFLoader.js"></script>
     <script src="js/OrbitControls.js"></script>
     <script src="move.js"></script>
+
+    <div id="quest-container">
+      <img id="quest" src="image/quest.png" alt="quest Image">
+    </div>
+    <div id="canvas">
+      <img id="infinity" src="image/infinity_check.png" alt="infinity Image">
+      <img id="cube" src="image/cube_check.png" alt="cube Image">
+      <img id="vision" src="image/vision_check.png" alt="vision Image">
+    </div>
   </body>
 </html>

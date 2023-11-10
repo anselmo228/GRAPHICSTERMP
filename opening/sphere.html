@@ -63,6 +63,7 @@
     var openingAudio = document.getElementById("openingAudio");
     var gameStartAudio = document.getElementById("gameStartAudio");
   
+    // 오프닝 음악 나오다가 start 누르면 음악 멈추고 gamestart 효과음 나오고 페이지 넘어감
     function startGame() {
       openingAudio.pause();
       openingAudio.currentTime = 0; 
