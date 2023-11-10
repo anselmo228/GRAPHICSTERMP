@@ -4,7 +4,12 @@ var myScore = document.getElementById("score");
 var progressBar = document.getElementById("progress-bar");
 
 var scene, camera, renderer, playerMesh, missileMeshes, scoreMeshes;
-var playerGeometry, playerMaterial, missileGeometry, missileMaterial, scoreGeometry, scoreMaterial;
+var playerGeometry,
+  playerMaterial,
+  missileGeometry,
+  missileMaterial,
+  scoreGeometry,
+  scoreMaterial;
 var directionalLight, ambientLight;
 
 var gameOver = false;
@@ -13,7 +18,7 @@ var time = 0;
 var player = {
   x: 0,
   y: 0,
-  radius: 20
+  radius: 20,
 };
 var level = 1;
 var totalLevels = 3;
@@ -42,21 +47,21 @@ function init() {
   document.getElementById("webgl-container").appendChild(renderer.domElement);
 
   // const loader = new THREE.GLTFLoader();
-	// loader.load('../model/mudang.gltf', function(gltf){
-	//   mudang = gltf.scene;
-	//   mudang.scale.set(15, 15 ,15);
-    
-	//   scene.add(gltf.scene);
+  // loader.load('../model/mudang.gltf', function(gltf){
+  //   mudang = gltf.scene;
+  //   mudang.scale.set(15, 15 ,15);
+
+  //   scene.add(gltf.scene);
 
   //   animate();
 
-	// }, undefined, function (error) {
-	// 	console.error(error);
-	// });
+  // }, undefined, function (error) {
+  // 	console.error(error);
+  // });
 
   playerGeometry = new THREE.SphereGeometry(10, 32, 32);
   playerMaterial = new THREE.MeshPhongMaterial({
-    color: 0x0727CA,
+    color: 0x0727ca,
     specular: 0xffffff,
   });
   playerMesh = new THREE.Mesh(playerGeometry, playerMaterial);
@@ -65,14 +70,14 @@ function init() {
 
   missileGeometry = new THREE.SphereGeometry(5, 32, 32);
   missileMaterial = new THREE.MeshPhongMaterial({
-    color: 0x07A852,
+    color: 0x07a852,
     specular: 0xffffff,
   });
 
   missileMeshes = [];
   scoreGeometry = new THREE.SphereGeometry(5, 32, 32);
   scoreMaterial = new THREE.MeshPhongMaterial({
-    color: 0xFFD500,
+    color: 0xffd500,
     specular: 0xffffff,
   });
 
@@ -86,7 +91,7 @@ function init() {
   scene.add(ambientLight);
 }
 
-document.addEventListener('mousemove', function (event) {
+document.addEventListener("mousemove", function (event) {
   if (!gameOver) {
     // Get the canvas size
     var canvasWidth = window.innerWidth;
@@ -111,7 +116,6 @@ document.addEventListener('mousemove', function (event) {
 
 // Game loop
 function gameLoop() {
-
   if (waitForRestart) {
     return; // If waiting for restart, do not continue the game loop
   }
@@ -128,8 +132,9 @@ function gameLoop() {
     }
   }
 
-  if(score < maxScore){
-    if (time % 50 == 0) {  // Create a missile every 1000 milliseconds (1 second)
+  if (score < maxScore) {
+    if (time % 50 == 0) {
+      // Create a missile every 1000 milliseconds (1 second)
       var x = (Math.random() * 2 - 1) * 300;
       var missileMesh = new THREE.Mesh(missileGeometry, missileMaterial);
       missileMesh.position.set(x, 300, 0); // Start missiles at the top of the window
@@ -137,19 +142,20 @@ function gameLoop() {
       missileMeshes.push(missileMesh);
     }
 
-    if (time % 10 == 0) {  // Create a missile every 1000 milliseconds (1 second)
+    if (time % 10 == 0) {
+      // Create a missile every 1000 milliseconds (1 second)
       var x = (Math.random() * 2 - 1) * 300;
       var scoreMesh = new THREE.Mesh(scoreGeometry, scoreMaterial);
       scoreMesh.position.set(x, 300, 0); // Start missiles at the top of the window
       scene.add(scoreMesh);
       scoreMeshes.push(scoreMesh);
     }
-  
+
     time++;
-  
+
     for (var i = 0; i < missileMeshes.length; i++) {
       missileMeshes[i].position.y -= 5 + time / speed; // Move missile meshes up the screen
-  
+
       if (missileMeshes[i].position.y < -100) {
         scene.remove(missileMeshes[i]);
         missileMeshes.splice(i, 1);
@@ -157,21 +163,21 @@ function gameLoop() {
       } else {
         var distance = Math.sqrt(
           Math.pow(playerMesh.position.x - missileMeshes[i].position.x, 2) +
-          Math.pow(playerMesh.position.y - missileMeshes[i].position.y, 2)
+            Math.pow(playerMesh.position.y - missileMeshes[i].position.y, 2)
         );
-  
+
         if (distance < player.radius + 10) {
           scene.remove(missileMeshes[i]);
           missileMeshes.splice(i, 1);
           i--;
-          score-=100;
+          score -= 100;
         }
       }
     }
 
     for (var i = 0; i < scoreMeshes.length; i++) {
       scoreMeshes[i].position.y -= 5 + time / speed; // Move missile meshes up the screen
-  
+
       if (scoreMeshes[i].position.y < -100) {
         scene.remove(scoreMeshes[i]);
         scoreMeshes.splice(i, 1);
@@ -179,14 +185,14 @@ function gameLoop() {
       } else {
         var distance = Math.sqrt(
           Math.pow(playerMesh.position.x - scoreMeshes[i].position.x, 2) +
-          Math.pow(playerMesh.position.y - scoreMeshes[i].position.y, 2)
+            Math.pow(playerMesh.position.y - scoreMeshes[i].position.y, 2)
         );
-  
+
         if (distance < player.radius + 10) {
           scene.remove(scoreMeshes[i]);
           scoreMeshes.splice(i, 1);
           i--;
-          score+=100;
+          score += 100;
         }
       }
     }
@@ -194,7 +200,7 @@ function gameLoop() {
 
   if (score < maxScore) {
     myScore.innerHTML =
-          "<span class='hit'></span> Score: " + score + "/" + maxScore;
+      "<span class='hit'></span> Score: " + score + "/" + maxScore;
   } else {
     gameOver = true;
   }
@@ -227,7 +233,6 @@ function updateProgressBar() {
   var progress = (score / maxScore) * 100;
   progressBar.style.width = progress + "%";
 }
-
 
 // 모달 창 띄우기
 var modal1 = document.getElementById("modal1");
@@ -268,15 +273,15 @@ window.onclick = function (event) {
 
 function restartGame() {
   waitForRestart = false; // Reset the flag when restart game is called
-  missileMeshes.forEach(mesh => scene.remove(mesh));
-  scoreMeshes.forEach(mesh => scene.remove(mesh));
+  missileMeshes.forEach((mesh) => scene.remove(mesh));
+  scoreMeshes.forEach((mesh) => scene.remove(mesh));
   missileMeshes = [];
   scoreMeshes = [];
   requestAnimationFrame(gameLoop);
 }
 
 window.onload = function () {
-  init()
+  init();
   modal1.style.display = "block";
   myLevel.innerText = comments[level - 1];
 

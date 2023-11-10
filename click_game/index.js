@@ -303,7 +303,7 @@ startBtn.onclick = function () {
     window.localStorage.setItem("x", "-25");
     window.localStorage.setItem("y", "0");
     window.localStorage.setItem("z", "-36");
-
+    window.localStorage.setItem("game1", "true");
     window.location.href = "../main/main.html";
   }
 
@@ -315,7 +315,7 @@ closeBtn.onclick = function () {
     window.localStorage.setItem("x", "-30");
     window.localStorage.setItem("y", "0");
     window.localStorage.setItem("z", "-36");
-
+    window.localStorage.setItem("game1", "true");
     window.location.href = "../main/main.html";
   }
 

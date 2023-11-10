@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const infin = new THREE.Vector3(-30, 0, -36); // 무한대
   const cu = new THREE.Vector3(-31, -2, -15); // 큐브
-  const vis = new THREE.Vector3(-2, -4, -2); 
-  const exer = new THREE.Vector3(-1, -3.31, 56); 
+  const vis = new THREE.Vector3(-2, -4, -2);
+  const exer = new THREE.Vector3(-1, -3.31, 56);
   const proximityThreshold = 5.0; // Set the proximity threshold within which the action will be triggered
 
   floorTexture.wrapS = THREE.RepeatWrapping;
@@ -58,7 +58,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const somangTexture = textureLoader.load("../images/somang.png");
   const busTexture = textureLoader.load("../images/bus.png");
   const bigRoadTexture = textureLoader.load("../images/big_road.png");
-  const road2Texture = textureLoader.load("../images/road2.png")
+  const road2Texture = textureLoader.load("../images/road2.png");
+  const apeachTexture = textureLoader.load("../images/apeach.png");
+  const ryanTexture = textureLoader.load("../images/ryan.png");
 
   function createImage(x, y, z, texture, size_x, size_y, rotation) {
     const imageMesh = new THREE.Mesh(
@@ -93,17 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // 운동장
   createImage(-20, -3.3, -50, playGroundTexture, 20, 20);
 
-  // 길
-  // createImage(-1, -3.3, -44.3, road2Texture, 10, 10);
-  // createImage(-1, -3.31, -37.8, road2Texture, 10, 10);
-  // createImage(-1, -3.31, -31.2, road2Texture, 10, 10);
-  // createImage(-7.6, -3.31, -21.7, road2Texture, 10, 10, 1);
-  // createImage(-14.3, -3.31, -21.7, road2Texture, 10, 10, 1);
-  // createImage(-21, -3.31, -21.7, road2Texture, 10, 10, 1);
-  // createImage(-1, -3.31, -23.5, roadLotateTexture, 10, 10);
-
   // 무당이
-  createImage(5, -3.31, -26.5, moodangTexture, 13, 10);
+  createImage(0, -3.31, -26.5, moodangTexture, 13, 10);
 
   // 소망 로고
   createImage(-12, -3.31, -27.5, somangTexture, 13, 10);
@@ -117,6 +110,32 @@ document.addEventListener("DOMContentLoaded", function () {
   createImage(-1, -3.31, 37.5, road2Texture, 33, 33);
   createImage(1.7, -3.31, 58, exersiceTexture, 20, 20);
 
+  // 라이언
+  createImage(12, -3.31, -15.5, ryanTexture, 10, 10);
+
+  // 어피치
+  createImage(-10, -3.31, -8.5, apeachTexture, 10, 10);
+
+  // 퀘스트 진행 여부 확인 로직
+  var infinityImage = document.getElementById("infinity");
+  var cubeImage = document.getElementById("cube");
+  var visionImage = document.getElementById("vision");
+
+  const checkGame1 = window.localStorage.getItem("game1");
+  const checkGame2 = window.localStorage.getItem("game2");
+  const checkGame3 = window.localStorage.getItem("game3");
+
+  if (checkGame1 != null) {
+    infinityImage.src = "image/infinity_check.png";
+  }
+
+  if (checkGame2 != null) {
+    cubeImage.src = "image/cube_check.png";
+  }
+
+  if (checkGame3 != null) {
+    visionImage.src = "image/vision_check.png";
+  }
 
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById("scene-container").appendChild(renderer.domElement);
