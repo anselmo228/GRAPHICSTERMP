@@ -3,7 +3,7 @@ body {
   padding: 0;
   background-color: black;
   color: black;
-  background-image: url("gachon.jpg");
+  background-image: url("assets/gachon.jpg");
   background-size: cover;
   font-family: 'Bree Serif', sans-serif;
 }

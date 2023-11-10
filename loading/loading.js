@@ -1,4 +1,15 @@
+
+
 window.onload = function () {
+  var BGM = new Audio('bubble.mp3');
+  BGM.load();
+  BGM.loop = true;
+
+  // Wait for a user interaction, like a click, before playing the audio
+  document.addEventListener('click', function() {
+    BGM.play();
+  });
+
   setTimeout(() => {
     window.location.href =
     ' ../click_game/index.html';
