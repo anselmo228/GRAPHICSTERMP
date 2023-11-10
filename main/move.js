@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const infin = new THREE.Vector3(-30, 0, -36); // 무한대
   const cu = new THREE.Vector3(-31, -2, -15); // 큐브
+  const vis = new THREE.Vector3(-2, -4, -2);
   const proximityThreshold = 5.0; // Set the proximity threshold within which the action will be triggered
 
   floorTexture.wrapS = THREE.RepeatWrapping;
@@ -306,12 +307,18 @@ document.addEventListener("DOMContentLoaded", function () {
     if (character) {
       const distance = character.position.distanceTo(infin);
       const distance1 = character.position.distanceTo(cu);
+      const distance2 = character.position.distanceTo(vis);
       if (distance < proximityThreshold) {
         // The character is within the proximity threshold of the target location, trigger the new HTML page here.
         window.location.href = "../loading/loading.html"; // Replace 'loading.html' with the desired URL.
         return; // Stop further animation if you want to switch pages immediately.
       }
       if (distance1 < proximityThreshold) {
+        // The character is within the proximity threshold of the target location, trigger the new HTML page here.
+        //window.location.href = "주애게임"; // Replace 'loading.html' with the desired URL.
+        return; // Stop further animation if you want to switch pages immediately.
+      }
+      if (distance2 < proximityThreshold) {
         // The character is within the proximity threshold of the target location, trigger the new HTML page here.
         window.location.href = "../RYTHMGAME/loading/loading.html"; // Replace 'loading.html' with the desired URL.
         return; // Stop further animation if you want to switch pages immediately.

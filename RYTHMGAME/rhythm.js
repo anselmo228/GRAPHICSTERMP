@@ -206,7 +206,7 @@ function gameClear() {
   modalContent.innerHTML = `
     <h2>GAME CLEAR</h2>
     <p>Your Score: ${score}</p>
-    <button id="tryAgain1">NEXT</button>
+    <button id="next">NEXT</button>
   `;
 
   // 모달 스타일 설정 (기존 스타일 사용)
@@ -222,6 +222,18 @@ function gameClear() {
   song.pause();
   song.currentTime = 0;
   clear.play();
+
+  const nextButton = document.getElementById('next');
+  nextButton.addEventListener('click', function () {
+
+    // Add the following lines to execute the desired actions
+    window.localStorage.setItem("x", "-3");
+    window.localStorage.setItem("y", "0");
+    window.localStorage.setItem("z", "-6");
+    window.location.href = "../main/main.html";
+
+    modalContent.style.display = "none";
+  });
 }
 
 function gameOver() {
