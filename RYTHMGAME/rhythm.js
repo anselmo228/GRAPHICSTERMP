@@ -227,9 +227,9 @@ function gameClear() {
   nextButton.addEventListener('click', function () {
 
     // Add the following lines to execute the desired actions
-    window.localStorage.setItem("x", "-3");
+    window.localStorage.setItem("x", "-2");
     window.localStorage.setItem("y", "0");
-    window.localStorage.setItem("z", "-6");
+    window.localStorage.setItem("z", "5");
     window.location.href = "../main/main.html";
 
     modalContent.style.display = "none";

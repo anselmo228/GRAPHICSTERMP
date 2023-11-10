@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const infin = new THREE.Vector3(-30, 0, -36); // 무한대
   const cu = new THREE.Vector3(-31, -2, -15); // 큐브
-  const vis = new THREE.Vector3(-2, -4, -2);
+  const vis = new THREE.Vector3(-2, -4, -2); 
+  const exer = new THREE.Vector3(-1, -3.31, 56); 
   const proximityThreshold = 5.0; // Set the proximity threshold within which the action will be triggered
 
   floorTexture.wrapS = THREE.RepeatWrapping;
@@ -57,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const somangTexture = textureLoader.load("../images/somang.png");
   const busTexture = textureLoader.load("../images/bus.png");
   const bigRoadTexture = textureLoader.load("../images/big_road.png");
+  const road2Texture = textureLoader.load("../images/road2.png")
 
   function createImage(x, y, z, texture, size_x, size_y, rotation) {
     const imageMesh = new THREE.Mesh(
@@ -111,6 +113,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 큰길
   createImage(-12, -3.31, -25.5, bigRoadTexture, 40, 60);
+  createImage(-1, -3.31, 16, road2Texture, 33, 33);
+  createImage(-1, -3.31, 37.5, road2Texture, 33, 33);
+  createImage(1.7, -3.31, 58, exersiceTexture, 20, 20);
+
 
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById("scene-container").appendChild(renderer.domElement);
@@ -308,6 +314,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const distance = character.position.distanceTo(infin);
       const distance1 = character.position.distanceTo(cu);
       const distance2 = character.position.distanceTo(vis);
+      const distance3 = character.position.distanceTo(exer);
       if (distance < proximityThreshold) {
         // The character is within the proximity threshold of the target location, trigger the new HTML page here.
         window.location.href = "../loading/loading.html"; // Replace 'loading.html' with the desired URL.
@@ -321,6 +328,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (distance2 < proximityThreshold) {
         // The character is within the proximity threshold of the target location, trigger the new HTML page here.
         window.location.href = "../RYTHMGAME/loading/loading.html"; // Replace 'loading.html' with the desired URL.
+        return; // Stop further animation if you want to switch pages immediately.
+      }
+      if (distance3 < 10) {
+        // The character is within the proximity threshold of the target location, trigger the new HTML page here.
+        window.location.href = "../ending/sphere.html"; // Replace 'loading.html' with the desired URL.
         return; // Stop further animation if you want to switch pages immediately.
       }
     }

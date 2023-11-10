@@ -1,6 +1,11 @@
 
 var renderer, scene, camera, composer, planet, mixer, clock;
 var stars=[];
+window.localStorage.removeItem("x");
+window.localStorage.removeItem("y");
+window.localStorage.removeItem("z");
+window.localStorage.clear();
+
 
 window.onload = function() {
   init();
