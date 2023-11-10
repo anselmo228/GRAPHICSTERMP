@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
   scene.add(directionalLight);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
-  
 
   //바닥 이미지
   const textureLoader = new THREE.TextureLoader();
@@ -122,12 +121,25 @@ document.addEventListener("DOMContentLoaded", function () {
   let rotationSpeed = 0.1; // 회전 속도
   let movementSpeed = 0.5; // 이동 속도
 
+  const currentX = localStorage.getItem("x");
+  const currentY = localStorage.getItem("y");
+  const currentZ = localStorage.getItem("z");
+
   // 무당이 //
   loader.load("../model/mudang.gltf", (gltf) => {
     character = gltf.scene;
     scene.add(character);
 
-    character.position.set(0, -3.3, -63);
+    if (currentX != null && currentY != null && currentZ != null) {
+      character.position.set(
+        parseInt(currentX),
+        parseInt(currentY),
+        parseInt(currentZ)
+      );
+    } else {
+      character.position.set(0, -3.3, -63);
+    }
+
     character.castShadow = true;
     character.receiveShadow = true;
 
@@ -209,8 +221,8 @@ document.addEventListener("DOMContentLoaded", function () {
     animate();
   });
 
-   // 비전타워 //
-   loader.load("../model/vision/scene.gltf", (gltf) => {
+  // 비전타워 //
+  loader.load("../model/vision/scene.gltf", (gltf) => {
     const vision = gltf.scene;
     scene.add(vision);
 
@@ -223,7 +235,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     animate();
   });
-
 
   let rotationAngle = 0; // 현재 회전 각도
 

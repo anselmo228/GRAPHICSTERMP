@@ -21,6 +21,8 @@ var stars = []; // 별들의 초기 위치를 저장하는 배열
 var modal = document.getElementById("modal");
 var startBtn = document.getElementById("startGame");
 var closeBtn = document.getElementsByClassName("close")[0];
+var welcomeHeader = document.querySelector("h2");
+var gameDescription = document.querySelector("p");
 
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
@@ -244,6 +246,11 @@ function onDocumentMouseDown(event) {
           } else {
             myScore.innerHTML =
               "<strong>You win!</strong> Click the screen to play again.";
+            modal.style.display = "block";
+            welcomeHeader.innerText = "";
+            gameDescription.style.fontSize = "30px";
+            gameDescription.innerText = "Game Clear!!!";
+            startBtn.innerText = "Exit";
           }
         }
         updateProgressBar(); // 여기서 호출
@@ -290,15 +297,28 @@ function onWindowResize() {
 }
 
 // 모달 창 띄우기
-var modal = document.getElementById("modal");
-var startBtn = document.getElementById("startGame");
-var closeBtn = document.getElementsByClassName("close")[0];
 
 startBtn.onclick = function () {
+  if (level === totalLevels && complete === true) {
+    window.localStorage.setItem("x", "-25");
+    window.localStorage.setItem("y", "0");
+    window.localStorage.setItem("z", "-36");
+
+    window.location.href = "../main/main.html";
+  }
+
   modal.style.display = "none"; // 시작 버튼을 누르면 모달이 사라집니다.
 };
 
 closeBtn.onclick = function () {
+  if (level === totalLevels && complete === true) {
+    window.localStorage.setItem("x", "-30");
+    window.localStorage.setItem("y", "0");
+    window.localStorage.setItem("z", "-36");
+
+    window.location.href = "../main/main.html";
+  }
+
   modal.style.display = "none"; // 닫기 버튼을 누르면 모달이 사라집니다.
 };
 
