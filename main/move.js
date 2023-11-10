@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       if (distance1 < proximityThreshold) {
         // The character is within the proximity threshold of the target location, trigger the new HTML page here.
-        //window.location.href = "주애게임"; // Replace 'loading.html' with the desired URL.
+        window.location.href = "../SUBERUNKER/loading/loading.html"; // Replace 'loading.html' with the desired URL.
         return; // Stop further animation if you want to switch pages immediately.
       }
       if (distance2 < proximityThreshold) {
