@@ -3,6 +3,10 @@ var myLevel = document.getElementById("level");
 var myScore = document.getElementById("score");
 var progressBar = document.getElementById("progress-bar");
 
+var missileAudio = new Audio('Crash.mp3');
+var scoreAudio = new Audio('Coin.mp3');
+var BGM = new Audio('bgm.mp3');
+
 var scene, camera, renderer, playerMesh, missileMeshes, scoreMeshes;
 var playerGeometry,
   playerMaterial,
@@ -25,9 +29,18 @@ var totalLevels = 3;
 var speed = 300;
 var maxScore = 500;
 var waitForRestart = true;
+var complete = false;
 
 function init() {
   scene = new THREE.Scene();
+
+  missileAudio.load();
+  scoreAudio.load();
+  BGM.load();
+
+  missileAudio.volume = 0.3; // 음량 설정
+  scoreAudio.volume = 0.3; // 음량 설정
+  BGM.volume = 0.3; // 음량 설정
 
   var desiredWidth = 600;
   var aspectRatio = window.innerWidth / window.innerHeight;
@@ -45,19 +58,6 @@ function init() {
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById("webgl-container").appendChild(renderer.domElement);
-
-  // const loader = new THREE.GLTFLoader();
-  // loader.load('../model/mudang.gltf', function(gltf){
-  //   mudang = gltf.scene;
-  //   mudang.scale.set(15, 15 ,15);
-
-  //   scene.add(gltf.scene);
-
-  //   animate();
-
-  // }, undefined, function (error) {
-  // 	console.error(error);
-  // });
 
   playerGeometry = new THREE.SphereGeometry(10, 32, 32);
   playerMaterial = new THREE.MeshPhongMaterial({
@@ -116,6 +116,9 @@ document.addEventListener("mousemove", function (event) {
 
 // Game loop
 function gameLoop() {
+  BGM.play();
+  BGM.loop = true;
+
   if (waitForRestart) {
     return; // If waiting for restart, do not continue the game loop
   }
@@ -171,6 +174,8 @@ function gameLoop() {
           missileMeshes.splice(i, 1);
           i--;
           score -= 100;
+          missileAudio.currentTime = 0; // 재생 위치를 처음으로 설정
+          missileAudio.play();
         }
       }
     }
@@ -193,6 +198,8 @@ function gameLoop() {
           scoreMeshes.splice(i, 1);
           i--;
           score += 100;
+          scoreAudio.currentTime = 0; // 재생 위치를 처음으로 설정
+          scoreAudio.play();
         }
       }
     }
@@ -223,6 +230,10 @@ function restartScene() {
     speed = 300;
     maxScore = 500;
     level = 1;
+    if(totalLevels == 3){
+      complete = true;
+      restartBtn.innerText = "Go to Main";
+    }
   }
 
   myLevel.innerText = comments[level - 1];
@@ -249,6 +260,14 @@ startBtn.onclick = function () {
 };
 
 restartBtn.onclick = function () {
+  if (complete === true) {
+    window.localStorage.setItem("x", "-25");
+    window.localStorage.setItem("y", "-2");
+    window.localStorage.setItem("z", "-15");
+    window.localStorage.setItem("game2", "true");
+    window.location.href = "../main/main.html";
+  }
+
   modal2.style.display = "none"; // 시작 버튼을 누르면 모달이 사라집니다.
   waitForRestart = false; // Reset the flag when restart button is clicked
   restartGame();
@@ -265,9 +284,11 @@ closeBtn2.onclick = function () {
 window.onclick = function (event) {
   if (event.target == modal1) {
     modal1.style.display = "none"; // 모달 바깥을 누르면 모달이 사라집니다.
+    waitForRestart = false; // Reset the flag when restart button is clicked
   }
   if (event.target == modal2) {
     modal2.style.display = "none"; // 모달 바깥을 누르면 모달이 사라집니다.
+    waitForRestart = false; // Reset the flag when restart button is clicked
   }
 };
 
@@ -282,6 +303,7 @@ function restartGame() {
 
 window.onload = function () {
   init();
+
   modal1.style.display = "block";
   myLevel.innerText = comments[level - 1];
 
