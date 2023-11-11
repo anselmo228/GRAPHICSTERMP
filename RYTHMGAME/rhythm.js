@@ -314,6 +314,7 @@ function gameLoop() {
   ctx.fillStyle = "black"; // 핑크색으로 변경
   ctx.fillText(theme, 500, 150);
   ctx.fillText("Speed: " + arrowSpeed, 250, 250);
+  ctx.fillText(score + "/100", 1175, 70);
 
   requestAnimationFrame(gameLoop);
 }
