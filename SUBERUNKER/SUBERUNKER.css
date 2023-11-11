@@ -5,7 +5,7 @@ body {
   color: black;
   background-image: url("assets/ai.jpg");
   background-size: cover;
-  font-family: 'Bree Serif', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
 }
 
 canvas {
@@ -67,13 +67,13 @@ h2{
   height: 100%;
   text-align: center;
   overflow: auto;
-  font-family: 'Bree Serif', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
   font-size: 20px;
-  font-family: 'Bree Serif', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
   border-radius: 10px;
   display: block; /* 모달 내부 요소들을 보이도록 설정 */
   background-color: #fefefe;
@@ -114,7 +114,7 @@ h2{
 }
 
 button {
-  font-family: 'Bree Serif', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
   background-color: #4caf50; /* 배경 색상 */
   border: none;
   color: white; /* 텍스트 색상 */
