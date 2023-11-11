@@ -62,6 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const road2Texture = textureLoader.load("../images/road2.png");
   const apeachTexture = textureLoader.load("../images/apeach.png");
   const ryanTexture = textureLoader.load("../images/ryan.png");
+  const last_wordTexture = textureLoader.load("../images/finish_word1.png");
+  const last_wordTexture2 = textureLoader.load("../images/finish_word2.png");
+  const last_wordTexture3 = textureLoader.load("../images/finish_word3.png");
 
   function createImage(x, y, z, texture, size_x, size_y, rotation) {
     const imageMesh = new THREE.Mesh(
@@ -107,7 +110,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 큰길
   createImage(-12, -3.31, -25.5, bigRoadTexture, 40, 60);
-  createImage(-1, -3.31, 16, road2Texture, 33, 33);
+  createImage(1.7, -3.31, 22, last_wordTexture, 10, 5);
+  createImage(1.7, -3.31, 18, last_wordTexture2, 25, 5);
+  createImage(1.7, -3.31, 14, last_wordTexture3, 25, 5);
   createImage(-1, -3.31, 37.5, road2Texture, 33, 33);
   createImage(1.7, -3.31, 58, exersiceTexture, 20, 20);
 
@@ -197,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const action = mixer.clipAction(gltf.animations[0]);
     action.play();
 
-    camera.position.set(2, 5, 10);
+    camera.position.set(2, 3, 8);
     camera.lookAt(character.position);
 
     animate();
@@ -313,8 +318,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const delta = clock.getDelta();
 
     // 카메라 위치 업데이트
-    const cameraDistance = 6; // 카메라와 캐릭터 사이의 거리
-    const cameraHeight = 15; // 카메라의 높이
+    const cameraDistance = 5; // 카메라와 캐릭터 사이의 거리
+    const cameraHeight = 13; // 카메라의 높이
 
     const characterDirection = new THREE.Vector3(
       -Math.sin(rotationAngle),
@@ -334,41 +339,41 @@ document.addEventListener("DOMContentLoaded", function () {
       mixer.update(delta / 2); // 애니메이션 재생 속도
     }
 
-  if (character) {
-    const distance = character.position.distanceTo(infin);
-    const distance1 = character.position.distanceTo(cu);
-    const distance2 = character.position.distanceTo(vis);
-    const distance3 = character.position.distanceTo(exer);
+    if (character) {
+      const distance = character.position.distanceTo(infin);
+      const distance1 = character.position.distanceTo(cu);
+      const distance2 = character.position.distanceTo(vis);
+      const distance3 = character.position.distanceTo(exer);
 
-    if (distance < proximityThreshold) {
-      start.play();
-      setTimeout(function() {
-        window.location.href = "../loading/loading.html";
-      }, 500);
-      return;
+      if (distance < proximityThreshold) {
+        start.play();
+        setTimeout(function () {
+          window.location.href = "../loading/loading.html";
+        }, 500);
+        return;
+      }
+      if (distance1 < proximityThreshold) {
+        start.play();
+        setTimeout(function () {
+          window.location.href = "../SUBERUNKER/loading/loading.html";
+        }, 500);
+        return;
+      }
+      if (distance2 < proximityThreshold) {
+        start.play();
+        setTimeout(function () {
+          window.location.href = "../RYTHMGAME/loading/loading.html";
+        }, 500);
+        return;
+      }
+      if (distance3 < 10) {
+        start.play();
+        setTimeout(function () {
+          window.location.href = "../ending/exercise.html";
+        }, 300);
+        return;
+      }
     }
-    if (distance1 < proximityThreshold) {
-      start.play();
-      setTimeout(function() {
-        window.location.href = "../SUBERUNKER/loading/loading.html";
-      }, 500);
-      return;
-    }
-    if (distance2 < proximityThreshold) {
-      start.play();
-      setTimeout(function() {
-        window.location.href = "../RYTHMGAME/loading/loading.html";
-      }, 500);
-      return;
-    }
-    if (distance3 < 10) {
-      start.play();
-      setTimeout(function() {
-        window.location.href = "../ending/exercise.html";
-      }, 300);
-      return;
-    }
-  }
 
     renderer.render(scene, camera);
   }
