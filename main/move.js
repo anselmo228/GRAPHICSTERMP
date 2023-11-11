@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const vis = new THREE.Vector3(-2, -4, -2);
   const exer = new THREE.Vector3(-1, -3.31, 56);
   const proximityThreshold = 5.0; // Set the proximity threshold within which the action will be triggered
+  const walk = new Audio("../sound/walking.mp3");
 
   floorTexture.wrapS = THREE.RepeatWrapping;
   floorTexture.wrapT = THREE.RepeatWrapping;
@@ -273,6 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mixer.clipAction(mixer._actions[0].getClip()).play();
         character.position.x += Math.sin(rotationAngle) * movementSpeed;
         character.position.z += Math.cos(rotationAngle) * movementSpeed;
+        walk.play();
         break;
       case "s":
         // s 키 : 후진
@@ -280,6 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mixer.clipAction(mixer._actions[0].getClip()).play();
         character.position.x -= Math.sin(rotationAngle) * movementSpeed;
         character.position.z -= Math.cos(rotationAngle) * movementSpeed;
+        walk.play();
         break;
       case "a":
         // a 키 : 좌측으로 회전
@@ -300,6 +303,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // 키 안 눌렀을 때 멈추기
     mixer.timeScale = 0;
   });
+
+  const start = new Audio("../sound/game_start.mp3");
 
   //3인칭 전면 시점
   function animate() {
@@ -329,32 +334,42 @@ document.addEventListener("DOMContentLoaded", function () {
       mixer.update(delta / 2); // 애니메이션 재생 속도
     }
 
-    if (character) {
-      const distance = character.position.distanceTo(infin);
-      const distance1 = character.position.distanceTo(cu);
-      const distance2 = character.position.distanceTo(vis);
-      const distance3 = character.position.distanceTo(exer);
-      if (distance < proximityThreshold) {
-        // The character is within the proximity threshold of the target location, trigger the new HTML page here.
-        window.location.href = "../loading/loading.html"; // Replace 'loading.html' with the desired URL.
-        return; // Stop further animation if you want to switch pages immediately.
-      }
-      if (distance1 < proximityThreshold) {
-        // The character is within the proximity threshold of the target location, trigger the new HTML page here.
-        window.location.href = "../SUBERUNKER/loading/loading.html"; // Replace 'loading.html' with the desired URL.
-        return; // Stop further animation if you want to switch pages immediately.
-      }
-      if (distance2 < proximityThreshold) {
-        // The character is within the proximity threshold of the target location, trigger the new HTML page here.
-        window.location.href = "../RYTHMGAME/loading/loading.html"; // Replace 'loading.html' with the desired URL.
-        return; // Stop further animation if you want to switch pages immediately.
-      }
-      if (distance3 < 10) {
-        // The character is within the proximity threshold of the target location, trigger the new HTML page here.
-        window.location.href = "../ending/exercise.html"; // Replace 'loading.html' with the desired URL.
-        return; // Stop further animation if you want to switch pages immediately.
-      }
+  if (character) {
+    const distance = character.position.distanceTo(infin);
+    const distance1 = character.position.distanceTo(cu);
+    const distance2 = character.position.distanceTo(vis);
+    const distance3 = character.position.distanceTo(exer);
+
+    if (distance < proximityThreshold) {
+      start.play();
+      setTimeout(function() {
+        window.location.href = "../loading/loading.html";
+      }, 500);
+      return;
     }
+    if (distance1 < proximityThreshold) {
+      start.play();
+      setTimeout(function() {
+        window.location.href = "../SUBERUNKER/loading/loading.html";
+      }, 500);
+      return;
+    }
+    if (distance2 < proximityThreshold) {
+      start.play();
+      setTimeout(function() {
+        window.location.href = "../RYTHMGAME/loading/loading.html";
+      }, 500);
+      return;
+    }
+    if (distance3 < 10) {
+      start.play();
+      setTimeout(function() {
+        window.location.href = "../ending/exercise.html";
+      }, 300);
+      return;
+    }
+  }
+
     renderer.render(scene, camera);
   }
   animate();

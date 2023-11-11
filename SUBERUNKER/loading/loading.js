@@ -1,4 +1,10 @@
 window.onload = function () {
+
+  var BGM = new Audio('bubble.mp3');
+  BGM.load();
+  BGM.loop = true;
+  BGM.play();
+  
   setTimeout(() => {
     window.location.href =
     ' ../SUBERUNKER.html';
