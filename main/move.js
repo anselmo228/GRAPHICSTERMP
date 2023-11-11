@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
         parseInt(currentZ)
       );
     } else {
-      character.position.set(0, -3.3, -63);
+      character.position.set(0, -1, -63);
     }
 
     character.castShadow = true;
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const action = mixer.clipAction(gltf.animations[0]);
     action.play();
 
-    camera.position.set(2, 3, 8);
+    camera.position.set(2, 7, 8);
     camera.lookAt(character.position);
 
     animate();
@@ -315,28 +315,16 @@ document.addEventListener("DOMContentLoaded", function () {
   function animate() {
     requestAnimationFrame(animate);
 
-    const delta = clock.getDelta();
-
-    // 카메라 위치 업데이트
-    const cameraDistance = 5; // 카메라와 캐릭터 사이의 거리
-    const cameraHeight = 13; // 카메라의 높이
-
-    const characterDirection = new THREE.Vector3(
-      -Math.sin(rotationAngle),
-      0,
-      -Math.cos(rotationAngle)
-    );
-    const cameraPosition = new THREE.Vector3()
-      .copy(character.position)
-      .addScaledVector(characterDirection, cameraDistance);
-    camera.position.copy(cameraPosition);
-    camera.position.y += cameraHeight; // 캐릭터 위치에서 높이 조정
+    //카메라 위치 업데이트
+    camera.position.x = character.position.x; // x 위치를 캐릭터와 일치
+    camera.position.z = character.position.z - 10; // 뒤에서 캐릭터를 바라보도록 설정
+    camera.position.y = character.position.y + 9; // 머리 위에서 조금 떨어진 위치
 
     camera.lookAt(character.position);
 
     // 모델의 애니메이션 업데이트
     if (mixer) {
-      mixer.update(delta / 2); // 애니메이션 재생 속도
+      mixer.update(0.008); //애니메이션 재생 속도
     }
 
     if (character) {
