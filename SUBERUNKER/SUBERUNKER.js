@@ -3,9 +3,9 @@ var myLevel = document.getElementById("level");
 var myScore = document.getElementById("score");
 var progressBar = document.getElementById("progress-bar");
 
-var missileAudio = new Audio('assets/Crash.mp3');
-var scoreAudio = new Audio('assets/Coin.mp3');
-var BGM = new Audio('assets/bgm.mp3');
+var missileAudio = new Audio("assets/Crash.mp3");
+var scoreAudio = new Audio("assets/Coin.mp3");
+var BGM = new Audio("assets/bgm.mp3");
 
 var scene, camera, renderer, playerMesh, missileMeshes, scoreMeshes;
 var playerGeometry,
@@ -230,7 +230,7 @@ function restartScene() {
     speed = 300;
     maxScore = 500;
     level = 1;
-    if(totalLevels == 3){
+    if (totalLevels == 3) {
       complete = true;
       restartBtn.innerText = "Go to Main";
     }

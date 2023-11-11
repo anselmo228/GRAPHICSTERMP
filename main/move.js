@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const roadTexture = textureLoader.load("../images/road.png");
 
   const infin = new THREE.Vector3(-30, 0, -36); // 무한대
-  const cu = new THREE.Vector3(-31, -2, -15); // 큐브
+  const cu = new THREE.Vector3(-36, -2, -15); // 큐브
   const vis = new THREE.Vector3(-2, -4, -2);
   const exer = new THREE.Vector3(-1, -3.31, 56);
   const proximityThreshold = 5.0; // Set the proximity threshold within which the action will be triggered
@@ -244,8 +244,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const cube = gltf.scene;
     scene.add(cube);
 
-    cube.position.set(-31, -2, -15);
-    cube.scale.set(1, 1, 1);
+    cube.position.set(-36, -2, -15);
+    cube.scale.set(3, 3, 3);
 
     cube.castShadow = true;
     cube.receiveShadow = true;
