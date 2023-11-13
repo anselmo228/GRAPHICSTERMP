@@ -337,8 +337,11 @@ function startGame(currentTrack) {
   over.pause();
   over.currentTime = 0;
   song.play();
+  const beatsPerMinute = 120;
+  const millisecondsPerBeat = 60000 / beatsPerMinute;
+  const arrowCreationInterval = millisecondsPerBeat / 4;
 
-  setInterval(createArrow, 1000);
+  setInterval(createArrow, arrowCreationInterval);
   gameLoop();
 }
 
